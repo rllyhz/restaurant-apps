@@ -1,0 +1,8 @@
+footer {
+  padding: var(--content-padding);
+  text-align: center;
+  background-color: var(--primary-color);
+}
+footer p:nth-child(2) {
+  font-weight: var(--font-medium);
+}

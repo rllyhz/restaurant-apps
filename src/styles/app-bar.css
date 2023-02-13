@@ -1,0 +1,24 @@
+header {
+  background-color: white;
+  box-shadow: 0 2px 12px var(--app-bar-shadow-color);
+  padding: 1.2rem var(--content-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+header .nav-brand {
+  display: inline-block;
+  font-weight: var(--font-medium);
+  text-decoration: none;
+}
+header nav ul {
+  display: block;
+  width: inherit;
+  height: inherit;
+  display: flex;
+}
+header nav ul li {
+  list-style: none;
+}
