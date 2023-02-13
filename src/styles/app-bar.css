@@ -8,6 +8,7 @@ header {
   align-items: center;
   position: sticky;
   top: 0;
+  z-index: 9999;
 }
 header .nav-toggle {
   margin-right: 1.4rem;
@@ -25,6 +26,7 @@ header .nav-brand a {
 header nav.nav-menu {
   position: fixed;
   top: calc(var(--app-bar-height) + 1rem);
+  z-index: 9999;
   left: -100%;
   width: 80%;
   height: 100vh;
@@ -32,11 +34,11 @@ header nav.nav-menu {
   transition: all 350ms ease-in-out;
 
   /* Glassmorphism effect */
-background: rgba(255, 255, 255, 0.084);
-border-radius: 4px;
-box-shadow: 0 4px 30px rgba(137, 137, 137, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
+background: rgba(255, 255, 255, 0.842);
+border-top-right-radius: 4px;
+box-shadow: 0 4px 32px rgba(137, 137, 137, 0.237);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
 }
 header nav.open {
   left: 0;
@@ -56,6 +58,7 @@ header nav.nav-menu .nav-list .nav-item:not(:last-child) {
     position: unset;
     width: inherit;
     height: unset;
+    padding: unset;
     background: unset;
     border-radius: unset;
     box-shadow: unset;
