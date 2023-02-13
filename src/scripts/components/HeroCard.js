@@ -5,17 +5,17 @@ export default class HeroCard extends HTMLElement {
     super();
   }
 
-  set imageData({src = '', alt = ''}) {
-    this._render(src, alt);
+  set heroData({imageSrc = '', imageAlt = '', tagline = '', description = ''}) {
+    this._render(imageSrc, imageAlt, tagline, description);
   }
 
-  _render(src, alt) {
+  _render(imageSrc, imageAlt, tagline, description) {
     this.innerHTML = `
     <div class='card-image'>
-      <img src='${src}' alt='${alt}' />
+      <img src='${imageSrc}' alt='${imageAlt}' />
       <div class='card-description'>
-        <h2>Taste and Delicious</h2>
-        <p>Find the best food and dishes for your best preferences</p>
+        <h2>${tagline}</h2>
+        <p>${description}</p>
       </div>
     </div>
   `;
