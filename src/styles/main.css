@@ -8,6 +8,7 @@ html {
   --font-medium: 400;
   --font-large: 500;
 
+  --app-bar-height: 4rem;
   --content-padding: 1rem;
 }
 h1,h2,h3,h4,h5,h6,p,ul,li {
@@ -22,10 +23,20 @@ body {
   margin: 0;
   scroll-behavior: smooth;
 }
+body.drawer-open-mode{
+  height: 100%;
+  overflow: hidden;
+}
 #root {
-  min-height: 80vh;
+  min-height: 95vh;
 }
 a {
   text-decoration: underline;
   color: inherit;
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    --content-padding: 2rem;
+  }
 }

@@ -1,24 +1,67 @@
 header {
+  display: flex;
+  height: var(--app-bar-height);
   background-color: white;
   box-shadow: 0 2px 12px var(--app-bar-shadow-color);
-  padding: 1.2rem var(--content-padding);
-  display: flex;
-  justify-content: space-between;
+  padding: 0 var(--content-padding);
+  justify-content: flex-start;
   align-items: center;
   position: sticky;
   top: 0;
 }
-header .nav-brand {
+header .nav-toggle i.bx {
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin-right: 1.4rem;
+  margin-top: 3.5px;
+}
+header .nav-brand a {
   display: inline-block;
   font-weight: var(--font-medium);
   text-decoration: none;
 }
-header nav ul {
-  display: block;
-  width: inherit;
-  height: inherit;
-  display: flex;
+header nav.nav-menu {
+  position: fixed;
+  top: calc(var(--app-bar-height) + 1rem);
+  left: -100%;
+  width: 80%;
+  height: 100vh;
+  padding: var(--content-padding);
+  transition: all 350ms ease-in-out;
+
+  /* Glassmorphism effect */
+background: rgba(255, 255, 255, 0.084);
+border-radius: 4px;
+box-shadow: 0 4px 30px rgba(137, 137, 137, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+}
+header nav.open {
+  left: 0;
 }
 header nav ul li {
   list-style: none;
+}
+
+@media only screen and (min-width: 768px) {
+  header {
+    justify-content: space-between;
+  }
+  header nav.nav-menu {
+    position: unset;
+    width: inherit;
+    height: unset;
+    background-color: unset;
+    transition: none;
+  }
+  header nav.nav-menu .nav-list {
+    display: flex;
+    width: inherit;
+  }
+  header nav.nav-menu .nav-list .nav-item:not(:last-child) {
+    margin-right: 1rem;
+  }
+  header .nav-toggle {
+    display: none;
+  }
 }

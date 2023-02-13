@@ -14,14 +14,19 @@ export default class App {
     initApp({
       title: 'Restaurant App | Rully Ihza Mahendra',
       header: createElement({
-        tagName: AppBar.tagName
+        tagName: AppBar.tagName,
+        data: {
+          toggleDrawerCallback: () => {
+            console.log('should toggle drawer button');
+          }
+        }
       }),
       footer: createElement({
         tagName: CustomFooter.tagName
       })
     });
 
-    Router.addOnPreReloadCallback(() => { 
+    Router.addOnPreReloadCallback(() => {
       getRootPage().innerHTML = '';
     });
 

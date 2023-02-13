@@ -5,23 +5,31 @@ export default class AppBar extends HTMLElement {
     super();
   }
 
-  connectedCallback() {
+  set toggleDrawerCallback(newCallback) {
+    this._toggleDrawerCallback = newCallback;
     this._render();
   }
 
   _render() {
     this.innerHTML = `
     <header>
-      <a class='nav-brand' href='/'>RestaurantApp</a>
-      <nav>
-        <ul>
-          <li><a href='/'>Home</a></li>
-          <li><a href='/#'>Favorite</a></li>
-          <li><a href='https://rllyhz.github.io/'>About Us</a></li>
+      <div class='nav-toggle'>
+        <i class='bx bx-menu'></i>
+      </div>
+      <div class='nav-brand'>
+        <a href='/'>RestaurantApp</a>
+      </div>
+      <nav class='nav-menu'>
+        <ul class='nav-list'>
+          <li class='nav-item'><a href='/'>Home</a></li>
+          <li class='nav-item'><a href='/#'>Favorite</a></li>
+          <li class='nav-item'><a href='https://rllyhz.github.io/'>About Us</a></li>
         </ul>
       </nav>
     </header>
   `;
+
+  this.querySelector('.nav-toggle').addEventListener('click', this._toggleDrawerCallback);
   }
 }
 
