@@ -9,10 +9,12 @@ header {
   position: sticky;
   top: 0;
 }
+header .nav-toggle {
+  margin-right: 1.4rem;
+}
 header .nav-toggle i.bx {
   font-size: 1.6rem;
   cursor: pointer;
-  margin-right: 1.4rem;
   margin-top: 3.5px;
 }
 header .nav-brand a {

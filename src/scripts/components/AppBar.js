@@ -12,8 +12,8 @@ export default class AppBar extends HTMLElement {
 
   _render() {
     this.innerHTML = `
-    <header>
-      <div class='nav-toggle'>
+    <header tabIndex='-1'>
+      <div tabIndex='0' class='nav-toggle'>
         <i class='bx bx-menu'></i>
       </div>
       <div class='nav-brand'>
@@ -29,7 +29,7 @@ export default class AppBar extends HTMLElement {
     </header>
   `;
 
-  this.querySelector('.nav-toggle').addEventListener('click', this._toggleDrawerCallback);
+  this.querySelector('.bx').addEventListener('click', this._toggleDrawerCallback);
   }
 }
 
