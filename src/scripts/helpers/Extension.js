@@ -1,6 +1,6 @@
 export class Observable {
   constructor({ observeAtFirstLaunch = false, initialValue = null }) {
-    this.value = initialValue;
+    this.currentValue = initialValue;
     this.observeAtFirstLaunch = observeAtFirstLaunch;
     this.observers = [];
   }
@@ -21,10 +21,10 @@ export class Observable {
   }
 
   emit(newValue) {
-    this.value = newValue;
+    this.currentValue = newValue;
     this.observers.forEach(obsvr => obsvr(newValue));
     return this;
   }
 }
 
-export const observableOf = (value) => new Observable({initialValue: value, observeAtFirstLaunch: true});
+export const observableOf = (value) => new Observable({initialValue: value, observeAtFirstLaunch: false});
