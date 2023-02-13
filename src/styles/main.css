@@ -1,3 +1,12 @@
+:root {
+  font-family: 'Poppins', sans-serif;
+  --primary-color: #A240E5;
+  --teal-color: #f0692b;
+}
+body {
+  font-size: 1rem;
+  font-weight: 300;
+}
 img {
   display: block;
 }
