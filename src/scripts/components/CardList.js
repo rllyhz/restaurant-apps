@@ -14,7 +14,7 @@ export default class CardList extends HTMLElement {
   _render() {
     this.innerHTML = `
       <div class='container-card'>
-        <h3>${this.dataset.title}</h3>
+        <h3 id='recommendation'>${this.dataset.title}</h3>
         <div class='container-items'></div>
       </div>
     `;

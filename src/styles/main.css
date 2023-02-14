@@ -10,6 +10,9 @@ html {
 
   --app-bar-height: 4rem;
   --content-padding: 1rem;
+
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 h1,h2,h3,h4,h5,h6,p,ul,li {
   margin: 0;
@@ -22,7 +25,6 @@ body {
   font-weight: 300;
   padding: 0;
   margin: 0;
-  scroll-behavior: smooth;
 }
 body.drawer-open-mode{
   height: 100%;
@@ -34,6 +36,20 @@ body.drawer-open-mode{
 a {
   text-decoration: underline;
   color: inherit;
+}
+.skip-to-content-action {
+  text-decoration: none;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 99999;
+  padding: 1rem 1.2rem;
+  background-color: var(--teal-color);
+  border-bottom-right-radius: 4px;
+  color: white;
+}
+.skip-to-content-action:focus {
+  top: 0;
 }
 
 @media only screen and (min-width: 768px) {
