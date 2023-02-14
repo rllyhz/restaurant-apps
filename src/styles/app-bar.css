@@ -12,10 +12,11 @@ header {
 }
 header .nav-toggle {
   margin-right: 1.4rem;
+  border: none;
+  background: none;
 }
 header .nav-toggle i.bx {
   font-size: 1.6rem;
-  cursor: pointer;
   margin-top: 3.5px;
 }
 header .nav-brand a {
