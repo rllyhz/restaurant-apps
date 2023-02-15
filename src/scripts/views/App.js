@@ -1,16 +1,15 @@
 import 'regenerator-runtime'; /* for async await transpile */
 import routes from '../routes/routes';
-import { Router } from '../helpers/RouteHelper';
+import { Router, toPath, UrlParser } from '../helpers/RouteHelper';
 import { createElement, getElem, getRootPage } from '../helpers/DomHelper';
 import { EventType, broadcastEvent } from '../helpers/EventHelper';
-import { initApp } from '../helpers/AppHelper';
+import { initApp, isOnMobileMode } from '../helpers/AppHelper';
 
 import AppBar from '../components/AppBar';
 import CustomFooter from '../components/CustomFooter';
-import HomePage from './pages/HomePage';
 
 export default class App {
-  static async renderPage() {
+  static async init() {
     const bodyDrawerOpenModeClassName = 'drawer-open-mode';
     const navMenuOpenClassName = 'open';
     let isDrawerOpen = false;
@@ -42,13 +41,27 @@ export default class App {
       header: createElement({
         tagName: AppBar.tagName,
         data: {
-          toggleDrawerCallback: () => {
-            isDrawerOpen = !isDrawerOpen;
-            broadcastEvent(
-              EventType.drawerMode,
-              document.body,
-              { isOpen: isDrawerOpen },
-            );
+          callbacks: {
+            toggleDrawerCallback: () => {
+              isDrawerOpen = !isDrawerOpen;
+              broadcastEvent(
+                EventType.drawerMode,
+                document.body,
+                { isOpen: isDrawerOpen },
+              );
+            },
+            onMenuItemClickedCallback: (url) => {
+              if (document.body.classList.contains(bodyDrawerOpenModeClassName)) {
+                isDrawerOpen = !isDrawerOpen;
+                broadcastEvent(
+                  EventType.drawerMode,
+                  document.body,
+                  { isOpen: isDrawerOpen },
+                );
+              }
+
+              Router.href(url);
+            },
           },
         },
       }),
@@ -60,8 +73,7 @@ export default class App {
 
     // when the app runs on mobile device (drawer mode enables)
     // set all the anchor menu to not accessible at first place
-    const viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-    if (viewport <= 768) {
+    if (isOnMobileMode()) {
       broadcastEvent(
         EventType.drawerMode,
         document.body,
@@ -69,15 +81,23 @@ export default class App {
       );
     }
 
-    Router.addOnPreReloadCallback(() => {
-      getRootPage().innerHTML = '';
-    });
+    // render active page initially
+    if (Router.path()) {
+      // path => #/
+      App.renderPage();
+    } else {
+      // path => /
+      Router.load({ initialPath: toPath('/') });
+    }
+  }
 
-    Router.addOnReloadCallback(async (currentPath, data) => {
-      const activePage = routes.getActivePage(currentPath);
-      await activePage.render(data);
-    });
+  static async renderPage() {
+    const data = Router.getPathData();
 
-    Router.load({ initialPath: HomePage.path });
+    const currentPath = UrlParser.parseActiveUrlWithCombiner();
+    const activePage = routes[currentPath];
+
+    getRootPage().innerHTML = ''; // clear page container
+    await activePage.render(data);
   }
 }

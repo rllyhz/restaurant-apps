@@ -3,17 +3,28 @@ import { toPath } from '../helpers/RouteHelper';
 export default class AppBar extends HTMLElement {
   static tagName = 'app-bar';
 
-  set toggleDrawerCallback(newCallback) {
-    this._toggleDrawerCallback = newCallback;
+  set callbacks({ toggleDrawerCallback, onMenuItemClickedCallback }) {
+    this._toggleDrawerCallback = toggleDrawerCallback;
+    this._menuItemClickedCallback = (e) => {
+      e.preventDefault();
+      onMenuItemClickedCallback(e.target.href);
+    };
+
     this._render();
   }
 
   connectedCallback() {
     this.querySelector('.nav-toggle').addEventListener('click', this._toggleDrawerCallback);
+    this.querySelectorAll('.nav-menu .nav-list .nav-item > a').forEach((menuItemElem) => {
+      menuItemElem.addEventListener('click', this._menuItemClickedCallback);
+    });
   }
 
   disconnectedCallback() {
     this.querySelector('.nav-toggle').removeEventListener('click', this._toggleDrawerCallback);
+    this.querySelectorAll('.nav-menu .nav-list .nav-item > a').forEach((menuItemElem) => {
+      menuItemElem.removeEventListener('click', this._menuItemClickedCallback);
+    });
   }
 
   _render() {

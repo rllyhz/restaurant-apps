@@ -1,5 +1,10 @@
 import { appendBody, createElement, rootPageElementId } from './DomHelper';
 
+export const isOnMobileMode = () => {
+  const viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+  return viewport <= 768;
+};
+
 export const setTitleApp = (newTitle) => {
   document.title = newTitle;
 };

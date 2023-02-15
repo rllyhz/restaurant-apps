@@ -7,8 +7,6 @@ import HeroCard from '../../components/HeroCard';
 import CardList from '../../components/CardList';
 
 export default class HomePage {
-  static path = '/';
-
   static async render() {
     const rootPage = getRootPage();
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');

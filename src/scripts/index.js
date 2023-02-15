@@ -5,9 +5,10 @@ import '../styles/custom-footer.css';
 import App from './views/App';
 
 document.addEventListener('DOMContentLoaded', () => {
-  App.renderPage();
+  App.init();
 });
 
-document.addEventListener('hashchange', () => {
+window.onhashchange = () => {
+  // re-render page
   App.renderPage();
-});
+};
