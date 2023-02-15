@@ -1,14 +1,17 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
+import Restaurant from '../../data/Restaurant';
 import CONFIG from '../../globals/config';
+import UIState from '../../helpers/UIState';
 
 import '../../../styles/hero-card.css';
 import '../../../styles/card-list.css';
+import '../../../styles/loading-indicator.css';
 import HeroCard from '../../components/HeroCard';
 import CardList from '../../components/CardList';
-import UIState from '../../helpers/UIState';
-import { observableOf } from '../../helpers/Extension';
-import Restaurant from '../../data/Restaurant';
+import ErrorMessage from '../../components/ErrorMessage';
+import LoadingIndicator from '../../components/LoadingIndicator';
 
 export default class HomePage {
   static async render() {
@@ -25,7 +28,9 @@ export default class HomePage {
       if (result.state === UIState.LOADING) {
         HomePage.onLoading();
       } else if (result.state === UIState.ERROR) {
-        HomePage.onError(result.data);
+        HomePage.onError(result.data, () => {
+          RestaurantSource.getRestaurants(observableRestaurants);
+        });
       } else {
         HomePage.onSuccess(result.data);
       }
@@ -37,26 +42,26 @@ export default class HomePage {
   static onLoading() {
     appendPage(
       createElement({
-        tagName: 'p',
-        styles: {
-          color: 'black',
-          textAlign: 'center',
-        },
-        innerText: 'Loading...',
+        tagName: LoadingIndicator.tagName,
       }),
     );
   }
 
-  static onError(err) {
-    console.log(err);
+  static onError(_, onRetry = () => {}) {
+    const title = 'Opsss... Something went wrong';
+    const description = 'It seemed like you\'re currently offline. Please check your connection and try again later.';
+
     appendPage(
       createElement({
-        tagName: 'p',
-        styles: {
-          color: 'red',
-          textAlign: 'center',
+        tagName: ErrorMessage.tagName,
+        data: {
+          errorData: {
+            title,
+            description,
+            retryBtnText: 'Refresh',
+            retryBtnCallback: onRetry,
+          },
         },
-        innerText: 'Error...',
       }),
     );
   }
