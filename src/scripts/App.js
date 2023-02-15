@@ -1,9 +1,9 @@
 import 'regenerator-runtime'; /* for async await transpile */
 import routes from './routes/routes';
-import Router from './helpers/RouteHelper';
+import { Router } from './helpers/RouteHelper';
 import { createElement, getElem, getRootPage } from './helpers/DomHelper';
+import { EventType, broadcastEvent } from './helpers/EventHelper';
 import { initApp } from './helpers/AppHelper';
-import { observableOf } from './helpers/Extension';
 
 import AppBar from './components/AppBar';
 import CustomFooter from './components/CustomFooter';
@@ -13,11 +13,11 @@ export default class App {
   static async renderPage() {
     const bodyDrawerOpenModeClassName = 'drawer-open-mode';
     const navMenuOpenClassName = 'open';
+    let isDrawerOpen = false;
 
-    const isDrawerOpenObservable = observableOf(false);
-
-    isDrawerOpenObservable.observe((isOpen) => {
+    document.body.addEventListener(EventType.drawerMode, (evt) => {
       const menuItems = getElem('.nav-menu').children[0].children;
+      const { isOpen } = evt.detail;
 
       if (isOpen) {
         getElem('body').classList.add(bodyDrawerOpenModeClassName);
@@ -43,8 +43,12 @@ export default class App {
         tagName: AppBar.tagName,
         data: {
           toggleDrawerCallback: () => {
-            const { currentValue } = isDrawerOpenObservable;
-            isDrawerOpenObservable.emit(!currentValue);
+            isDrawerOpen = !isDrawerOpen;
+            broadcastEvent(
+              EventType.drawerMode,
+              document.body,
+              { isOpen: isDrawerOpen },
+            );
           },
         },
       }),
@@ -58,7 +62,11 @@ export default class App {
     // set all the anchor menu to not accessible at first place
     const viewport = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
     if (viewport <= 768) {
-      isDrawerOpenObservable.emit(false);
+      broadcastEvent(
+        EventType.drawerMode,
+        document.body,
+        { isOpen: false },
+      );
     }
 
     Router.addOnPreReloadCallback(() => {
