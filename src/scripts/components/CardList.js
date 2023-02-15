@@ -31,7 +31,7 @@ export default class CardList extends HTMLElement {
               pictureId: item.pictureId,
               city: item.city,
               rating: item.rating,
-              onClickedCallback: (clickedItem) => { this._onItemClickedCallback(clickedItem); },
+              clickCallback: (_, clickedItem) => { this._onItemClickedCallback(clickedItem); },
             },
           },
         }),

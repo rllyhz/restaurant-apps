@@ -1,35 +1,58 @@
+import { toPath } from '../helpers/RouteHelper';
 import Restaurant from '../data/Restaurant';
 
 export default class CardItem extends HTMLElement {
   static tagName = 'card-item';
 
   set params({
-    id, name, description, pictureId, city, rating, onClickedCallback,
+    id, name, description, pictureId, city, rating, clickCallback,
   }) {
-    this._render(id, name, description, pictureId, city, rating, onClickedCallback);
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.pictureId = pictureId;
+    this.city = city;
+    this.rating = rating;
+
+    this.itemClickedListener = (event) => {
+      clickCallback(
+        event,
+        new Restaurant(
+          this.id,
+          this.name,
+          this.description,
+          this.pictureId,
+          this.city,
+          this.rating,
+        ),
+      );
+    };
+
+    this._render();
   }
 
-  _render(id, name, description, pictureId, city, rating, onClickedCallback) {
+  connectedCallback() {
+    this.querySelector('.card-detail a').addEventListener('click', this.itemClickedListener);
+  }
+
+  disconnectedCallback() {
+    this.querySelector('.card-detail a').removeEventListener('click', this.itemClickedListener);
+  }
+
+  _render() {
     this.innerHTML = `
-    <div class='card-content' data-id='${id}'>
+    <div class='card-content' data-id='${this.id}'>
     <div class='card-image'>
-      <img src='${pictureId}' alt='${name}' />
+      <img src='${this.pictureId}' alt='${this.name}' />
     </div>
     <div class='card-detail'>
-        <p>${name}🍽️🍴</p>
-        <p>${city} • ${rating}⭐</p>
-        <p>${description}</p>
-        <button>See more</button>
+        <p>${this.name}🍽️🍴</p>
+        <p>${this.city} • ${this.rating}⭐</p>
+        <p>${this.description}</p>
+        <a href='${toPath('/detail')}'>See more</a>
       </div>
     </div>
     `;
-
-    this.querySelector('.card-detail button').addEventListener('click', (event) => {
-      onClickedCallback(
-        new Restaurant(id, name, description, pictureId, city, rating),
-        event,
-      );
-    });
   }
 }
 
