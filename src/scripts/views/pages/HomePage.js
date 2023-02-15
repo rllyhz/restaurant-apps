@@ -1,10 +1,10 @@
-import { appendPage, createElement, getRootPage } from '../helpers/DomHelper';
-import getRestaurants from '../networks/Api';
+import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import getRestaurants from '../../networks/Api';
 
-import '../../styles/hero-card.css';
-import '../../styles/card-list.css';
-import HeroCard from '../components/HeroCard';
-import CardList from '../components/CardList';
+import '../../../styles/hero-card.css';
+import '../../../styles/card-list.css';
+import HeroCard from '../../components/HeroCard';
+import CardList from '../../components/CardList';
 
 export default class HomePage {
   static path = '/';

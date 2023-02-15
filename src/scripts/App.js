@@ -7,7 +7,7 @@ import { initApp } from './helpers/AppHelper';
 
 import AppBar from './components/AppBar';
 import CustomFooter from './components/CustomFooter';
-import HomePage from './pages/HomePage';
+import HomePage from './views/pages/HomePage';
 
 export default class App {
   static async renderPage() {

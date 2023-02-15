@@ -1,5 +1,5 @@
 import { Router } from '../helpers/RouteHelper';
-import HomePage from '../pages/HomePage';
+import HomePage from '../views/pages/HomePage';
 
 export default Router.build()
   .add(HomePage.path, HomePage);
