@@ -1,11 +1,10 @@
 import { toPath } from '../helpers/RouteHelper';
-import Restaurant from '../data/Restaurant';
 
 export default class CardItem extends HTMLElement {
   static tagName = 'card-item';
 
   set params({
-    id, name, description, imageSrc, city, rating, clickCallback,
+    id, name, description, imageSrc, city, rating,
   }) {
     this.id = id;
     this.name = name;
@@ -14,29 +13,7 @@ export default class CardItem extends HTMLElement {
     this.city = city;
     this.rating = rating;
 
-    this.itemClickedListener = (event) => {
-      clickCallback(
-        event,
-        new Restaurant(
-          this.id,
-          this.name,
-          this.description,
-          this.imageSrc,
-          this.city,
-          this.rating,
-        ),
-      );
-    };
-
     this._render();
-  }
-
-  connectedCallback() {
-    this.querySelector('.card-detail a').addEventListener('click', this.itemClickedListener);
-  }
-
-  disconnectedCallback() {
-    this.querySelector('.card-detail a').removeEventListener('click', this.itemClickedListener);
   }
 
   _render() {
@@ -49,7 +26,7 @@ export default class CardItem extends HTMLElement {
         <p>${this.name}🍽️🍴</p>
         <p>${this.city} • ${this.rating}⭐</p>
         <p>${this.description}</p>
-        <a href='${toPath('/detail')}'>See more</a>
+        <a href='${toPath(`/detail/${this.id}`)}'>See more</a>
       </div>
     </div>
     `;

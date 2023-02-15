@@ -110,8 +110,6 @@ export default class HomePage {
         data: {
           adapterData: {
             listItem: restaurants,
-            // eslint-disable-next-line no-alert
-            onItemClickedCallback: (item) => { alert(`Clicked ${item.name}`); },
           },
         },
       }),

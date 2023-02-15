@@ -7,7 +7,6 @@ export default class CardList extends HTMLElement {
 
   set adapterData(newAdapter) {
     this._items = newAdapter.listItem;
-    this._onItemClickedCallback = newAdapter.onItemClickedCallback;
     this._render();
   }
 
@@ -31,7 +30,6 @@ export default class CardList extends HTMLElement {
               imageSrc: item.imageSrc,
               city: item.city,
               rating: item.rating,
-              clickCallback: (_, clickedItem) => { this._onItemClickedCallback(clickedItem); },
             },
           },
         }),
