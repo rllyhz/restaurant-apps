@@ -80,8 +80,6 @@ export default class HomePage {
       `${CONFIG.BASE_IMAGE_MEDIUM}${item.pictureId}`,
       item.city,
       item.rating,
-      null,
-      [],
     ));
 
     // Hero card / Jumbotron
