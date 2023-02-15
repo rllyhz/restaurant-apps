@@ -1,10 +1,14 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
-import getRestaurants from '../../networks/Api';
+import RestaurantSource from '../../data/RestaurantSource';
+import CONFIG from '../../globals/config';
 
 import '../../../styles/hero-card.css';
 import '../../../styles/card-list.css';
 import HeroCard from '../../components/HeroCard';
 import CardList from '../../components/CardList';
+import UIState from '../../helpers/UIState';
+import { observableOf } from '../../helpers/Extension';
+import Restaurant from '../../data/Restaurant';
 
 export default class HomePage {
   static async render() {
@@ -12,6 +16,68 @@ export default class HomePage {
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;
     rootPage.style.paddingBottom = contentPaddingSize;
+
+    const observableRestaurants = observableOf({});
+
+    observableRestaurants.observe((result) => {
+      rootPage.innerHTML = '';
+
+      if (result.state === UIState.LOADING) {
+        HomePage.onLoading();
+      } else if (result.state === UIState.ERROR) {
+        HomePage.onError(result.data);
+      } else {
+        HomePage.onSuccess(result.data);
+      }
+    });
+
+    RestaurantSource.getRestaurants(observableRestaurants);
+  }
+
+  static onLoading() {
+    appendPage(
+      createElement({
+        tagName: 'p',
+        styles: {
+          color: 'black',
+          textAlign: 'center',
+        },
+        innerText: 'Loading...',
+      }),
+    );
+  }
+
+  static onError(err) {
+    console.log(err);
+    appendPage(
+      createElement({
+        tagName: 'p',
+        styles: {
+          color: 'red',
+          textAlign: 'center',
+        },
+        innerText: 'Error...',
+      }),
+    );
+  }
+
+  static onSuccess(data) {
+    if (data.error) {
+      HomePage.onError(data.message);
+      return;
+    }
+
+    let { restaurants } = data;
+    restaurants = restaurants.map((item) => new Restaurant(
+      item.id,
+      item.name,
+      item.description,
+      `${CONFIG.BASE_IMAGE_MEDIUM}${item.pictureId}`,
+      item.city,
+      item.rating,
+      null,
+      [],
+    ));
 
     // Hero card / Jumbotron
     appendPage(
@@ -28,8 +94,7 @@ export default class HomePage {
       }),
     );
 
-    // Card List
-    const restaurants = getRestaurants();
+    // Card list
     appendPage(
       createElement({
         tagName: CardList.tagName,
