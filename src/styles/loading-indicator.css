@@ -1,0 +1,31 @@
+loading-indicator {
+  display: flex;
+  width: 100%;
+  min-height: 30vh;
+  justify-content: center;
+  align-items: center;
+  --indicator-size: 1.8rem;
+  --indicator-thickness: 4px;
+  --indicator-background: #f3f3f3;
+}
+
+loading-indicator > .indicator {
+  border: var(--indicator-thickness) solid var(--indicator-background);
+  border-radius: 50%;
+  border-top: var(--indicator-thickness) solid var(--teal-color);
+  width: var(--indicator-size);
+  height: var(--indicator-size);
+  -webkit-animation: spin 1.5s linear infinite; /* Safari */
+  animation: spin 1.5s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
