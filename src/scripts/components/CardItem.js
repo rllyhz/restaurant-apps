@@ -5,12 +5,12 @@ export default class CardItem extends HTMLElement {
   static tagName = 'card-item';
 
   set params({
-    id, name, description, pictureId, city, rating, clickCallback,
+    id, name, description, imageSrc, city, rating, clickCallback,
   }) {
     this.id = id;
     this.name = name;
     this.description = description;
-    this.pictureId = pictureId;
+    this.imageSrc = imageSrc;
     this.city = city;
     this.rating = rating;
 
@@ -21,7 +21,7 @@ export default class CardItem extends HTMLElement {
           this.id,
           this.name,
           this.description,
-          this.pictureId,
+          this.imageSrc,
           this.city,
           this.rating,
         ),
@@ -43,7 +43,7 @@ export default class CardItem extends HTMLElement {
     this.innerHTML = `
     <div class='card-content' data-id='${this.id}'>
     <div class='card-image'>
-      <img src='${this.pictureId}' alt='${this.name}' />
+      <img src='${this.imageSrc}' alt='${this.name}' />
     </div>
     <div class='card-detail'>
         <p>${this.name}🍽️🍴</p>

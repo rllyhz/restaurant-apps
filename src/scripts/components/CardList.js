@@ -28,7 +28,7 @@ export default class CardList extends HTMLElement {
               id: item.id,
               name: item.name,
               description: truncateString(item.description),
-              pictureId: item.pictureId,
+              imageSrc: item.imageSrc,
               city: item.city,
               rating: item.rating,
               clickCallback: (_, clickedItem) => { this._onItemClickedCallback(clickedItem); },

@@ -9,9 +9,9 @@ export default class HeroCard extends HTMLElement {
 
   _render(imageSrc, imageAlt, tagline, description) {
     this.innerHTML = `
-    <div class='card-image'>
+    <div class='hero-card-image'>
       <img src='${imageSrc}' alt='${imageAlt}' />
-      <div class='card-description'>
+      <div class='hero-card-description'>
         <h2>${tagline}</h2>
         <p>${description}</p>
       </div>
