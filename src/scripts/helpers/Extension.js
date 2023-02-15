@@ -16,15 +16,15 @@ export class Observable {
     if (this.observeAtFirstLaunch) {
       this.observers[this.observers.length - 1](this.value);
     }
-
-    return this;
   }
 
   emit(newValue) {
     this.currentValue = newValue;
-    this.observers.forEach(obsvr => obsvr(newValue));
+    this.observers.forEach((obsvr) => obsvr(newValue));
     return this;
   }
 }
 
-export const observableOf = (value) => new Observable({initialValue: value, observeAtFirstLaunch: false});
+export const observableOf = (value) => new Observable({
+  initialValue: value, observeAtFirstLaunch: false,
+});

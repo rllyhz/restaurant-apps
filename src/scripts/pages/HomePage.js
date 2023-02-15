@@ -1,6 +1,5 @@
-import { getRootPage } from '../helpers/AppHelper';
-import { appendPage, createElement } from '../helpers/DomHelper';
-import { getRestaurants } from '../networks/Api';
+import { appendPage, createElement, getRootPage } from '../helpers/DomHelper';
+import getRestaurants from '../networks/Api';
 
 import '../../styles/hero-card.css';
 import '../../styles/card-list.css';
@@ -8,12 +7,11 @@ import HeroCard from '../components/HeroCard';
 import CardList from '../components/CardList';
 
 export default class HomePage {
-  static path = '/'
+  static path = '/';
 
-  static async render(data = null) {
+  static async render() {
     const rootPage = getRootPage();
-    const contentPaddingSize = getComputedStyle(rootPage)
-            .getPropertyValue('--content-padding');
+    const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;
     rootPage.style.paddingBottom = contentPaddingSize;
 
@@ -26,10 +24,10 @@ export default class HomePage {
             imageSrc: './images/heros/hero-image_2.jpg',
             imageAlt: 'Hero card image',
             tagline: 'Taste and Delicious',
-            description: 'Find the best food and dishes from the best restaurants for your best preferences'
-          }
-        }
-      })
+            description: 'Find the best food and dishes from the best restaurants for your best preferences',
+          },
+        },
+      }),
     );
 
     // Card List
@@ -39,15 +37,16 @@ export default class HomePage {
         tagName: CardList.tagName,
         classNames: 'restaurants',
         dataset: {
-          title: 'Recommended For You'
+          title: 'Recommended For You',
         },
         data: {
           adapterData: {
             listItem: restaurants,
-            onItemClickedCallback: item => { alert(`Clicked ${item.name}`); }
-          }
-        }
-      })
+            // eslint-disable-next-line no-alert
+            onItemClickedCallback: (item) => { alert(`Clicked ${item.name}`); },
+          },
+        },
+      }),
     );
   }
 }

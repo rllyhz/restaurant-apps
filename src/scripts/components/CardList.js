@@ -1,9 +1,9 @@
-import { createElement } from "../helpers/DomHelper";
-import { truncateString } from "../helpers/DataHelper";
-import CardItem from "./CardItem";
+import { createElement } from '../helpers/DomHelper';
+import truncateString from '../helpers/DataHelper';
+import CardItem from './CardItem';
 
 export default class CardList extends HTMLElement {
-  static tagName = 'card-list'
+  static tagName = 'card-list';
 
   set adapterData(newAdapter) {
     this._items = newAdapter.listItem;
@@ -19,7 +19,7 @@ export default class CardList extends HTMLElement {
       </div>
     `;
 
-    this._items.forEach(item => {
+    this._items.forEach((item) => {
       this.querySelector('.container-items').appendChild(
         createElement({
           tagName: CardItem.tagName,
@@ -31,10 +31,10 @@ export default class CardList extends HTMLElement {
               pictureId: item.pictureId,
               city: item.city,
               rating: item.rating,
-              onClickedCallback: item => { this._onItemClickedCallback(item); }
-            }
-          }
-        })
+              onClickedCallback: (clickedItem) => { this._onItemClickedCallback(clickedItem); },
+            },
+          },
+        }),
       );
     });
   }

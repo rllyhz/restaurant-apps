@@ -1,11 +1,9 @@
 export default class HeroCard extends HTMLElement {
-  static tagName = 'hero-card'
+  static tagName = 'hero-card';
 
-  constructor() {
-    super();
-  }
-
-  set heroData({imageSrc = '', imageAlt = '', tagline = '', description = ''}) {
+  set heroData({
+    imageSrc = '', imageAlt = '', tagline = '', description = '',
+  }) {
     this._render(imageSrc, imageAlt, tagline, description);
   }
 

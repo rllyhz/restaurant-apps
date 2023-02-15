@@ -1,16 +1,12 @@
 export default class CustomFooter extends HTMLElement {
-  static tagName = 'custom-footer'
-
-  constructor() {
-    super();
-  }
+  static tagName = 'custom-footer';
 
   connectedCallback() {
     this._render();
   }
 
   _render() {
-    let year = new Date().getFullYear()
+    const year = new Date().getFullYear();
 
     this.innerHTML = `
     <footer>

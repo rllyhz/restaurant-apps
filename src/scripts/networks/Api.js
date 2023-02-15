@@ -1,3 +1,5 @@
 import data from '../../DATA.json';
 
-export const getRestaurants = () => data.restaurants;
+const getRestaurants = () => data.restaurants;
+
+export default getRestaurants;

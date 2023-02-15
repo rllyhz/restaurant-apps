@@ -4,10 +4,10 @@ import '../styles/app-bar.css';
 import '../styles/custom-footer.css';
 import App from './App';
 
-document.addEventListener('DOMContentLoaded', _ => {
+document.addEventListener('DOMContentLoaded', () => {
   App.renderPage();
 });
 
-document.addEventListener('hashchange', _ => {
+document.addEventListener('hashchange', () => {
   App.renderPage();
 });

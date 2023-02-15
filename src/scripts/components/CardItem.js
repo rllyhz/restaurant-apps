@@ -1,9 +1,11 @@
-import Restaurant from "../data/Restaurant";
+import Restaurant from '../data/Restaurant';
 
 export default class CardItem extends HTMLElement {
-  static tagName = 'card-item'
-  
-  set params({ id, name, description, pictureId, city, rating, onClickedCallback }) {
+  static tagName = 'card-item';
+
+  set params({
+    id, name, description, pictureId, city, rating, onClickedCallback,
+  }) {
     this._render(id, name, description, pictureId, city, rating, onClickedCallback);
   }
 
@@ -22,10 +24,10 @@ export default class CardItem extends HTMLElement {
     </div>
     `;
 
-    this.querySelector('.card-detail button').addEventListener('click', event => {
+    this.querySelector('.card-detail button').addEventListener('click', (event) => {
       onClickedCallback(
         new Restaurant(id, name, description, pictureId, city, rating),
-        event
+        event,
       );
     });
   }

@@ -1,44 +1,41 @@
-const pages = {}, history = []
-let reloadCallback = null
-let preReloadCallback = null
+const pages = {};
+const history = [];
+let reloadCallback = null;
+let preReloadCallback = null;
 
-class _Route {
-
+const _routes = {
   add(path, page) {
     pages[path] = page;
     return this;
-  }
-
+  },
   getActivePage(path) {
     return pages[path];
-  }
-}
+  },
+};
 
-const _routes = new _Route();
-
-export class Router {
+class Router {
   static build() {
     return _routes;
   }
 
   static async addOnPreReloadCallback(newCallback) {
-    preReloadCallback = newCallback
+    preReloadCallback = newCallback;
   }
 
   static async addOnReloadCallback(newCallback) {
-    reloadCallback = newCallback
+    reloadCallback = newCallback;
   }
 
-  static load( { initialPath }, data = null) {
+  static load({ initialPath }, data = null) {
     if (history.length <= 0) {
       history.push(initialPath);
     }
 
-    if (preReloadCallback != null && typeof(preReloadCallback) == 'function') {
+    if (preReloadCallback != null && typeof preReloadCallback === 'function') {
       preReloadCallback();
     }
 
-    if (reloadCallback != null && typeof(reloadCallback) == 'function') {
+    if (reloadCallback != null && typeof reloadCallback === 'function') {
       reloadCallback(history[0], data);
     }
   }
@@ -46,11 +43,11 @@ export class Router {
   static navigateTo(path, data = null) {
     history.unshift(path);
 
-    if (preReloadCallback != null && typeof(preReloadCallback) == 'function') {
+    if (preReloadCallback != null && typeof preReloadCallback === 'function') {
       preReloadCallback();
     }
 
-    if (reloadCallback != null && typeof(reloadCallback) == 'function') {
+    if (reloadCallback != null && typeof reloadCallback === 'function') {
       reloadCallback(history[0], data);
     }
   }
@@ -62,12 +59,14 @@ export class Router {
 
     history.shift();
 
-    if (preReloadCallback != null && typeof(preReloadCallback) == 'function') {
+    if (preReloadCallback != null && typeof preReloadCallback === 'function') {
       preReloadCallback();
     }
 
-    if (reloadCallback != null && typeof(reloadCallback) == 'function') {
+    if (reloadCallback != null && typeof reloadCallback === 'function') {
       reloadCallback(history[0], null);
     }
   }
 }
+
+export default Router;
