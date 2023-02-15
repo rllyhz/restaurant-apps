@@ -1,13 +1,13 @@
 import 'regenerator-runtime'; /* for async await transpile */
-import routes from './routes/routes';
-import { Router } from './helpers/RouteHelper';
-import { createElement, getElem, getRootPage } from './helpers/DomHelper';
-import { EventType, broadcastEvent } from './helpers/EventHelper';
-import { initApp } from './helpers/AppHelper';
+import routes from '../routes/routes';
+import { Router } from '../helpers/RouteHelper';
+import { createElement, getElem, getRootPage } from '../helpers/DomHelper';
+import { EventType, broadcastEvent } from '../helpers/EventHelper';
+import { initApp } from '../helpers/AppHelper';
 
-import AppBar from './components/AppBar';
-import CustomFooter from './components/CustomFooter';
-import HomePage from './views/pages/HomePage';
+import AppBar from '../components/AppBar';
+import CustomFooter from '../components/CustomFooter';
+import HomePage from './pages/HomePage';
 
 export default class App {
   static async renderPage() {
@@ -36,7 +36,7 @@ export default class App {
       }
     });
 
-    // init app
+    // init app shell
     initApp({
       title: 'Restaurant App | Rully Ihza Mahendra',
       header: createElement({
