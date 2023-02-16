@@ -1,7 +1,7 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import DataHelper from '../../helpers/DataHelper';
 import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
-import Restaurant from '../../data/Restaurant';
 import { StringResource } from '../../globals/config';
 import UIState from '../../helpers/UIState';
 
@@ -83,14 +83,9 @@ export default class FavoritePage {
   }
 
   static onSuccess(_favRestaurants) {
-    const favRestaurants = _favRestaurants.map((item) => new Restaurant(
-      item.id,
-      item.name,
-      item.description,
-      item.imageSrc,
-      item.city,
-      item.rating,
-    ));
+    const favRestaurants = _favRestaurants
+      .reverse()
+      .map((item) => DataHelper.favToModel(item));
 
     // Add heading
     appendPage(

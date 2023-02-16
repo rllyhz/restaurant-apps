@@ -77,21 +77,18 @@ export default class RestaurantSource {
   static async getFavoriteRestaurants(observable) {
     observable.emit({ state: UIState.LOADING });
 
-    // simulate loading
-    setTimeout(async () => {
-      try {
-        const favoriteRestaurants = await FavRestaurantIdb.getAllFavRestaurants();
-        observable.emit({
-          state: UIState.SUCCESS,
-          data: {
-            favoriteRestaurants,
-          },
-        });
-      } catch (exception) {
-        observable.emit({ state: UIState.ERROR });
-        console.log(exception);
-      }
-    }, 1000);
+    try {
+      const favoriteRestaurants = await FavRestaurantIdb.getAllFavRestaurants();
+      observable.emit({
+        state: UIState.SUCCESS,
+        data: {
+          favoriteRestaurants,
+        },
+      });
+    } catch (exception) {
+      observable.emit({ state: UIState.ERROR });
+      console.log(exception);
+    }
 
     return observable;
   }
@@ -100,8 +97,8 @@ export default class RestaurantSource {
     await FavRestaurantIdb.putFavRestaurant(newFavRestaurant);
   }
 
-  static async deleteFromFavorite(favRestaurant) {
-    await FavRestaurantIdb.deleteFavRestaurant(favRestaurant);
+  static async deleteFromFavorite(id) {
+    await FavRestaurantIdb.deleteFavRestaurant(id);
   }
 
   static async isRestaurantAlreadyLiked(id) {

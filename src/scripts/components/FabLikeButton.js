@@ -38,7 +38,6 @@ export default class FabLikeButton extends HTMLElement {
 
   connectedCallback() {
     this.addEventListener('click', this._clickedCallback);
-    console.log(this.getBoundingClientRect().width);
   }
 
   disconnectedCallback() {

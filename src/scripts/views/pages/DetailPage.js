@@ -1,5 +1,6 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
 import { UrlParser } from '../../helpers/RouteHelper';
+import DataHelper from '../../helpers/DataHelper';
 import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
 import Restaurant from '../../data/Restaurant';
@@ -115,7 +116,7 @@ export default class DetailPage {
     );
   }
 
-  static onSuccess(data, onAddNewReview = () => {}) {
+  static async onSuccess(data, onAddNewReview = () => {}) {
     const {
       id, name, description, pictureId, city, rating, address, customerReviews, menus,
     } = data.restaurant;
@@ -177,15 +178,26 @@ export default class DetailPage {
     );
 
     // Add FabLikeButton
+    const isLiked = await RestaurantSource.isRestaurantAlreadyLiked(restaurant.id);
+
     appendPage(
       createElement({
         tagName: FabLikeButton.tagName,
         data: {
           detail: {
-            isLiked: false,
+            isLiked,
             position: FabLikeButton.Position.BOTTOM_RIGHT,
             size: FabLikeButton.Size.NORMAL,
-            toggleCallback: (isLiked) => { console.log(isLiked); },
+            itemName: 'Restaurant',
+            toggleCallback: (_isLiked) => {
+              if (_isLiked) {
+                RestaurantSource.addToFavorite(
+                  DataHelper.modelToFav(restaurant),
+                );
+              } else {
+                RestaurantSource.deleteFromFavorite(restaurant.id);
+              }
+            },
           },
         },
       }),
