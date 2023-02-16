@@ -1,19 +1,29 @@
 import { createElement } from '../helpers/DomHelper';
-import truncateString from '../helpers/DataHelper';
+import DataHelper from '../helpers/DataHelper';
 import CardItem from './CardItem';
 
 export default class CardList extends HTMLElement {
   static tagName = 'card-list';
 
-  set adapterData(newAdapter) {
-    this._items = newAdapter.listItem;
+  set detail({ listItem, useHeading = true, headingVariant = 'h2' }) {
+    this._items = listItem;
+    this._useHeading = useHeading;
+    this._headingVariant = headingVariant;
+    console.log(listItem);
     this._render();
+  }
+
+  _createHeadingElem() {
+    return '<'.concat(this._headingVariant).concat(' ')
+      .concat('class=\'card-title\'>')
+      .concat(this.dataset.title)
+      .concat(`</${this._headingVariant}>`);
   }
 
   _render() {
     this.innerHTML = `
       <div class='container-card'>
-        <h3 id='recommendation'>${this.dataset.title}</h3>
+        ${this._useHeading ? this._createHeadingElem() : ''}
         <div class='container-items'></div>
       </div>
     `;
@@ -26,7 +36,7 @@ export default class CardList extends HTMLElement {
             params: {
               id: item.id,
               name: item.name,
-              description: truncateString(item.description),
+              description: DataHelper.truncateString(item.description),
               imageSrc: item.imageSrc,
               city: item.city,
               rating: item.rating,
