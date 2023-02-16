@@ -9,7 +9,6 @@ export default class CardList extends HTMLElement {
     this._items = listItem;
     this._useHeading = useHeading;
     this._headingVariant = headingVariant;
-    console.log(listItem);
     this._render();
   }
 
