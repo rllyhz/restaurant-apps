@@ -1,4 +1,5 @@
 import API_ENDPOINT from '../globals/api-endpoint';
+import DummyData from '../helpers/DummyData';
 import UIState from '../helpers/UIState';
 
 export default class RestaurantSource {
@@ -69,6 +70,23 @@ export default class RestaurantSource {
           data: err,
         });
       });
+
+    return observable;
+  }
+
+  static async getFavoriteRestaurants(observable) {
+    // TODO IndexedBD implementation goes here
+    // Faking data for fow
+    observable.emit({ state: UIState.LOADING });
+
+    setTimeout(() => {
+      observable.emit({
+        state: UIState.SUCCESS,
+        data: {
+          favoriteRestaurants: DummyData.fakeRestaurants(),
+        },
+      });
+    }, 1000);
 
     return observable;
   }
