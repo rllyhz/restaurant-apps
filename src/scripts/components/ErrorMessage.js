@@ -1,5 +1,3 @@
-import '../../styles/error-message.css';
-
 export default class ErrorMessage extends HTMLElement {
   static tagName = 'error-message';
 

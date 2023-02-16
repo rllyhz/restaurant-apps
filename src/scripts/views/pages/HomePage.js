@@ -2,12 +2,9 @@ import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper'
 import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
 import Restaurant from '../../data/Restaurant';
-import CONFIG from '../../globals/config';
+import { CONFIG, StringResource } from '../../globals/config';
 import UIState from '../../helpers/UIState';
 
-import '../../../styles/hero-card.css';
-import '../../../styles/card-list.css';
-import '../../../styles/loading-indicator.css';
 import HeroCard from '../../components/HeroCard';
 import CardList from '../../components/CardList';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -20,23 +17,25 @@ export default class HomePage {
     rootPage.style.paddingTop = contentPaddingSize;
     rootPage.style.paddingBottom = contentPaddingSize;
 
-    const observableRestaurants = observableOf({});
+    const restaurantsObservable = observableOf({});
 
-    observableRestaurants.observe((result) => {
+    restaurantsObservable.observe((result) => {
       rootPage.innerHTML = '';
 
       if (result.state === UIState.LOADING) {
         HomePage.onLoading();
       } else if (result.state === UIState.ERROR) {
         HomePage.onError(result.data, () => {
-          RestaurantSource.getRestaurants(observableRestaurants);
+          RestaurantSource.getRestaurants(restaurantsObservable);
         });
       } else {
         HomePage.onSuccess(result.data);
       }
+
+      window.scrollTo({ top: 0, behavior: 'auto' });
     });
 
-    RestaurantSource.getRestaurants(observableRestaurants);
+    RestaurantSource.getRestaurants(restaurantsObservable);
   }
 
   static onLoading() {
@@ -48,8 +47,8 @@ export default class HomePage {
   }
 
   static onError(_, onRetry = () => {}) {
-    const title = 'Opsss... Something went wrong';
-    const description = 'It seemed like you\'re currently offline. Please check your connection and try again later.';
+    const title = StringResource.errorTitleText;
+    const description = StringResource.errorDescriptionText;
 
     appendPage(
       createElement({
@@ -58,7 +57,7 @@ export default class HomePage {
           errorData: {
             title,
             description,
-            retryBtnText: 'Refresh',
+            retryBtnText: StringResource.errorBtnRetryText,
             retryBtnCallback: onRetry,
           },
         },

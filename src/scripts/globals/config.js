@@ -4,4 +4,10 @@ const CONFIG = {
   BASE_IMAGE_LARGE: 'https://restaurant-api.dicoding.dev/images/large/',
 };
 
-export default CONFIG;
+const StringResource = {
+  errorTitleText: 'Opsss... Something went wrong',
+  errorDescriptionText: 'It seemed like you\'re currently offline. Please check your connection and try again later.',
+  errorBtnRetryText: 'Refresh',
+};
+
+export { CONFIG, StringResource };

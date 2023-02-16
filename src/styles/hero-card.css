@@ -39,7 +39,7 @@
 
 @media only screen and (width >= 1200px) {
   .hero-card-image {
-    width: 1000px;
+    width: var(--max-width-hero-image);
     margin: auto;
     border-radius: 4px;
     overflow: hidden;

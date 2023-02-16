@@ -1,0 +1,60 @@
+customer-review .full-reviews {
+  max-width: var(--max-width-container);
+  margin: auto;
+  margin-top: 1.4rem;
+}
+customer-review .full-reviews > .title {
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+customer-review .full-reviews > .reviews-container {
+  font-size: .7rem;
+}
+customer-review .full-reviews > .reviews-container .review {
+  display: inline-block;
+  width: 60%;
+  background-color: rgb(230, 229, 229);
+  margin: .2rem 0;
+  padding: .5rem 1.6rem .5rem 1.4rem;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4rem;
+  border-bottom-right-radius: 4rem;
+  border-bottom-left-radius: 4rem;
+}
+customer-review .full-reviews > .reviews-container .review > p:last-child {
+  font-size: .85rem;
+}
+customer-review .full-reviews > .give-review {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 1rem 0 2rem;
+  gap: .5rem
+}
+customer-review .full-reviews > .give-review > * {
+  display: inline-block;
+}
+customer-review .full-reviews > .give-review textarea {
+  /* font-family: inherit; */
+  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: .8rem;
+  border: none;
+  background-color: rgb(230, 229, 229);
+  padding: .5rem 1.6rem 1rem 1.4rem;
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4rem;
+}
+customer-review .full-reviews > .give-review button {
+  border: none;
+  background-color: var(--teal-color);
+  border-radius: 10rem;
+  padding: .95rem 1.4rem;
+  transition: all 150ms ease-in-out;
+}
+customer-review .full-reviews > .give-review button:hover {
+  background-color: var(--primary-color);
+}

@@ -1,0 +1,22 @@
+image-card {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+image-card > img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+@media only screen and (min-width: 768px) {
+  image-card > img {
+    max-width: 75%;
+  }
+}
+@media only screen and (width >= 1200px) {
+  image-card > img {
+    max-width: var(--max-width-detail-image);
+  }
+}

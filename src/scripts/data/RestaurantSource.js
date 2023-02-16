@@ -2,50 +2,50 @@ import API_ENDPOINT from '../globals/api-endpoint';
 import UIState from '../helpers/UIState';
 
 export default class RestaurantSource {
-  static async getRestaurants(observableData) {
-    observableData.emit({ state: UIState.LOADING });
+  static async getRestaurants(observable) {
+    observable.emit({ state: UIState.LOADING });
 
     fetch(API_ENDPOINT.GET_RESTAURANTS)
       .then((res) => res.json())
       .then((data) => {
-        observableData.emit({
+        observable.emit({
           state: UIState.SUCCESS,
           data,
         });
       })
       .catch((err) => {
-        observableData.emit({
+        observable.emit({
           state: UIState.ERROR,
           data: err,
         });
       });
 
-    return observableData;
+    return observable;
   }
 
-  static async getDetailOf(id, observableData) {
-    observableData.emit({ state: UIState.LOADING });
+  static async getDetailOf(id, observable) {
+    observable.emit({ state: UIState.LOADING });
 
     fetch(API_ENDPOINT.DETAIL_RESTAURANT(id))
       .then((res) => res.json())
       .then((data) => {
-        observableData.emit({
+        observable.emit({
           state: UIState.SUCCESS,
           data,
         });
       })
       .catch((err) => {
-        observableData.emit({
+        observable.emit({
           state: UIState.ERROR,
           data: err,
         });
       });
 
-    return observableData;
+    return observable;
   }
 
-  static async reviewRestaurant({ id, name, review }, observableData) {
-    observableData.emit({ state: UIState.LOADING });
+  static async reviewRestaurant({ id, name, review }, observable) {
+    observable.emit({ state: UIState.LOADING });
 
     fetch(API_ENDPOINT.ADD_NEW_REVIEW, {
       method: 'post',
@@ -58,18 +58,18 @@ export default class RestaurantSource {
     })
       .then((res) => res.json())
       .then((data) => {
-        observableData.emit({
+        observable.emit({
           state: UIState.SUCCESS,
           data,
         });
       })
       .catch((err) => {
-        observableData.emit({
+        observable.emit({
           state: UIState.ERROR,
           data: err,
         });
       });
 
-    return observableData;
+    return observable;
   }
 }

@@ -1,5 +1,15 @@
 export default class Restaurant {
-  constructor(id, name, description, imageSrc, city, rating, address = null, customerReviews = []) {
+  constructor(
+    id,
+    name,
+    description,
+    imageSrc,
+    city,
+    rating,
+    address = null,
+    customerReviews = [],
+    menus = {},
+  ) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -8,5 +18,6 @@ export default class Restaurant {
     this.rating = rating;
     this.address = address;
     this.customerReviews = customerReviews;
+    this.menus = menus;
   }
 }

@@ -4,6 +4,10 @@ html {
 
   --app-bar-shadow-color: rgba(125, 136, 197, 0.13);
 
+  --max-width-container: 920px;
+  --max-width-hero-image: 1000px;
+  --max-width-detail-image: 720px;
+
   --font-small: 300;
   --font-medium: 400;
   --font-large: 500;

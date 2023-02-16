@@ -1,0 +1,15 @@
+description-item .full-description {
+  max-width: var(--max-width-container);
+  margin: auto;
+}
+description-item .full-description > .name {
+  text-align: center;
+  margin: 2rem 0;
+}
+description-item .full-description > .city-rating,
+description-item .full-description > .address {
+  font-style: italic;
+}
+description-item .full-description > .description {
+  margin-top: 1rem;
+}
