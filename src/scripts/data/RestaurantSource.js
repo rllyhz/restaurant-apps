@@ -1,5 +1,5 @@
 import API_ENDPOINT from '../globals/api-endpoint';
-import DummyData from '../helpers/DummyData';
+import FavRestaurantIdb from './FavRestaurantIdb';
 import UIState from '../helpers/UIState';
 
 export default class RestaurantSource {
@@ -75,19 +75,37 @@ export default class RestaurantSource {
   }
 
   static async getFavoriteRestaurants(observable) {
-    // TODO IndexedBD implementation goes here
-    // Faking data for fow
     observable.emit({ state: UIState.LOADING });
 
-    setTimeout(() => {
-      observable.emit({
-        state: UIState.SUCCESS,
-        data: {
-          favoriteRestaurants: DummyData.fakeRestaurants(),
-        },
-      });
+    // simulate loading
+    setTimeout(async () => {
+      try {
+        const favoriteRestaurants = await FavRestaurantIdb.getAllFavRestaurants();
+        observable.emit({
+          state: UIState.SUCCESS,
+          data: {
+            favoriteRestaurants,
+          },
+        });
+      } catch (exception) {
+        observable.emit({ state: UIState.ERROR });
+        console.log(exception);
+      }
     }, 1000);
 
     return observable;
+  }
+
+  static async addToFavorite(newFavRestaurant) {
+    await FavRestaurantIdb.putFavRestaurant(newFavRestaurant);
+  }
+
+  static async deleteFromFavorite(favRestaurant) {
+    await FavRestaurantIdb.deleteFavRestaurant(favRestaurant);
+  }
+
+  static async isRestaurantAlreadyLiked(id) {
+    const favRestaurant = await FavRestaurantIdb.getFavRestaurant(id);
+    return !!favRestaurant;
   }
 }
