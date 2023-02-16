@@ -13,12 +13,14 @@ import '../styles/loading-indicator.css';
 import '../styles/error-message.css';
 
 import App from './views/App';
+import swRegister from './utils/sw-register';
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   App.init();
+  swRegister();
 });
 
-window.onhashchange = () => {
+window.addEventListener('hashchange', () => {
   // re-render page
   App.renderPage();
-};
+});
