@@ -11,6 +11,7 @@ import '../styles/custom-menu.css';
 import '../styles/customer-review.css';
 import '../styles/loading-indicator.css';
 import '../styles/error-message.css';
+import '../styles/fab-like-button.css';
 
 import App from './views/App';
 import swRegister from './utils/sw-register';
