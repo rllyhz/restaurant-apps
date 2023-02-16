@@ -12,6 +12,7 @@ import CustomMenu from '../../components/CustomMenu';
 import CustomerReview from '../../components/CustomerReview';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import ErrorMessage from '../../components/ErrorMessage';
+import FabLikeButton from '../../components/FabLikeButton';
 
 export default class DetailPage {
   static restaurantObservable = observableOf({});
@@ -170,6 +171,21 @@ export default class DetailPage {
             onAddReviewCallback: (review) => {
               onAddNewReview(restaurant.id, review);
             },
+          },
+        },
+      }),
+    );
+
+    // Add FabLikeButton
+    appendPage(
+      createElement({
+        tagName: FabLikeButton.tagName,
+        data: {
+          detail: {
+            isLiked: false,
+            position: FabLikeButton.Position.BOTTOM_RIGHT,
+            size: FabLikeButton.Size.NORMAL,
+            toggleCallback: (isLiked) => { console.log(isLiked); },
           },
         },
       }),
