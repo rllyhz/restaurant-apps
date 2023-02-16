@@ -25,14 +25,19 @@ export default class HomePage {
       if (result.state === UIState.LOADING) {
         HomePage.onLoading();
       } else if (result.state === UIState.ERROR) {
-        HomePage.onError(result.data, () => {
+        console.log(result.data);
+        HomePage.onError(StringResource.errorConnectionDescriptionText, () => {
           RestaurantSource.getRestaurants(restaurantsObservable);
         });
+      } else if (result.data.error) {
+        HomePage.onError(StringResource.errorRequestAPIDescriptionText, () => {
+          RestaurantSource.getRestaurants(restaurantsObservable);
+        });
+      } else if (result.data.restaurants.length <= 0) {
+        HomePage.onEmptyData();
       } else {
-        HomePage.onSuccess(result.data);
+        HomePage.onSuccess(result.data.restaurants);
       }
-
-      window.scrollTo({ top: 0, behavior: 'auto' });
     });
 
     RestaurantSource.getRestaurants(restaurantsObservable);
@@ -46,9 +51,9 @@ export default class HomePage {
     );
   }
 
-  static onError(_, onRetry = () => {}) {
+  static onError(message, onRetry = () => {}) {
     const title = StringResource.errorTitleText;
-    const description = StringResource.errorDescriptionText;
+    const description = message;
 
     appendPage(
       createElement({
@@ -65,14 +70,26 @@ export default class HomePage {
     );
   }
 
-  static onSuccess(data) {
-    if (data.error) {
-      HomePage.onError(data.message);
-      return;
-    }
+  static onEmptyData() {
+    const title = StringResource.emptyDataTitleText('Restaurants');
+    const description = StringResource.emptyDataDescriptionText;
 
-    let { restaurants } = data;
-    restaurants = restaurants.map((item) => new Restaurant(
+    appendPage(
+      createElement({
+        tagName: ErrorMessage.tagName,
+        data: {
+          errorData: {
+            title,
+            description,
+            enableRetry: false,
+          },
+        },
+      }),
+    );
+  }
+
+  static onSuccess(_restaurants) {
+    const restaurants = _restaurants.map((item) => new Restaurant(
       item.id,
       item.name,
       item.description,
@@ -105,8 +122,9 @@ export default class HomePage {
           title: 'Recommended For You',
         },
         data: {
-          adapterData: {
+          detail: {
             listItem: restaurants,
+            headingVariant: 'h3',
           },
         },
       }),

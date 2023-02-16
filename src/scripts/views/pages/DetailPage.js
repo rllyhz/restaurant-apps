@@ -44,12 +44,17 @@ export default class DetailPage {
 
   static restaurantObserver(result) {
     getRootPage().innerHTML = '';
+
     const id = DetailPage.getId();
 
     if (result.state === UIState.LOADING) {
       DetailPage.onLoading();
     } else if (result.state === UIState.ERROR) {
-      DetailPage.onError(result.data, () => {
+      DetailPage.onError(StringResource.errorConnectionDescriptionText, () => {
+        RestaurantSource.getDetailOf(id, DetailPage.restaurantObservable);
+      });
+    } else if (result.data.error) {
+      DetailPage.onError(StringResource.errorRequestAPIDescriptionText, () => {
         RestaurantSource.getDetailOf(id, DetailPage.restaurantObservable);
       });
     } else {
@@ -90,9 +95,9 @@ export default class DetailPage {
     );
   }
 
-  static onError(_, onRetry = () => {}) {
+  static onError(message, onRetry = () => {}) {
     const title = StringResource.errorTitleText;
-    const description = StringResource.errorDescriptionText;
+    const description = message;
 
     appendPage(
       createElement({
@@ -110,11 +115,6 @@ export default class DetailPage {
   }
 
   static onSuccess(data, onAddNewReview = () => {}) {
-    if (data.error) {
-      DetailPage.onError(data.message);
-      return;
-    }
-
     const {
       id, name, description, pictureId, city, rating, address, customerReviews, menus,
     } = data.restaurant;
