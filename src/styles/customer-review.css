@@ -21,6 +21,12 @@ customer-review .full-reviews > .reviews-container .review {
   border-bottom-right-radius: 4rem;
   border-bottom-left-radius: 4rem;
 }
+customer-review .full-reviews > .reviews-container .review > p:first-child {
+  color: rgb(132, 132, 132);
+}
+customer-review .full-reviews > .reviews-container .review > p:first-child b {
+  color: black;
+}
 customer-review .full-reviews > .reviews-container .review > p:last-child {
   font-size: .85rem;
 }
@@ -51,6 +57,8 @@ customer-review .full-reviews > .give-review textarea {
 customer-review .full-reviews > .give-review button {
   border: none;
   background-color: var(--teal-color);
+  color: white;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
   border-radius: 10rem;
   padding: .95rem 1.4rem;
   transition: all 150ms ease-in-out;

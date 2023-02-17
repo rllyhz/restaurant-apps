@@ -4,10 +4,10 @@ export default class ErrorMessage extends HTMLElement {
   set errorData({
     title, description, retryBtnText = null, retryBtnCallback = () => {}, enableRetry = true,
   }) {
-    this.title = title;
-    this.description = description;
-    this.retryBtnText = retryBtnText;
-    this.enableRetry = enableRetry;
+    this._title = title;
+    this._description = description;
+    this._retryBtnText = retryBtnText;
+    this._enableRetry = enableRetry;
 
     this.btnCallback = () => {
       retryBtnCallback();
@@ -17,18 +17,18 @@ export default class ErrorMessage extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.enableRetry) this.querySelector('.retry').addEventListener('click', this.btnCallback);
+    if (this.enableRetry) this.querySelector('.retry').addEventListener('click', this._btnCallback);
   }
 
   disconnectedCallback() {
-    if (this.enableRetry) this.querySelector('.retry').removeEventListener('click', this.btnCallback);
+    if (this.enableRetry) this.querySelector('.retry').removeEventListener('click', this._btnCallback);
   }
 
   _render() {
     this.innerHTML = `
-      <p class='title'>${this.title}</p>
-      <p class='description'>${this.description}</p>
-      ${this.enableRetry ? `<button class='retry'>${this.retryBtnText}</button>` : ''}
+      <p class='title'>${this._title}</p>
+      <p class='description'>${this._description}</p>
+      ${this._enableRetry ? `<button class='retry'>${this._retryBtnText}</button>` : ''}
     `;
   }
 }

@@ -5,17 +5,25 @@ import CardItem from './CardItem';
 export default class CardList extends HTMLElement {
   static tagName = 'card-list';
 
-  set detail({ listItem, useHeading = true, headingVariant = 'h2' }) {
+  set detail({
+    listItem,
+    useHeading = true,
+    headingText = '',
+    headingVariant = 'h2',
+    headingId = '',
+  }) {
     this._items = listItem;
     this._useHeading = useHeading;
+    this._headingText = headingText;
     this._headingVariant = headingVariant;
+    this._headingId = headingId;
     this._render();
   }
 
   _createHeadingElem() {
     return '<'.concat(this._headingVariant).concat(' ')
-      .concat('class=\'card-title\'>')
-      .concat(this.dataset.title)
+      .concat(`id='${this._headingId}' class='card-title'>`)
+      .concat(this._headingText)
       .concat(`</${this._headingVariant}>`);
   }
 

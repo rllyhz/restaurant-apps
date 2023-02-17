@@ -7,7 +7,7 @@ import '../styles/card-list.css';
 import '../styles/hero-card.css';
 import '../styles/image-card.css';
 import '../styles/description-item.css';
-import '../styles/custom-menu.css';
+import '../styles/custom-chips.css';
 import '../styles/customer-review.css';
 import '../styles/loading-indicator.css';
 import '../styles/error-message.css';

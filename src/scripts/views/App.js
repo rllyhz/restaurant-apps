@@ -98,6 +98,7 @@ export default class App {
     const activePage = routes[currentPath];
 
     getRootPage().innerHTML = ''; // clear page container
+    document.querySelector('app-bar').scrollIntoView();
     await activePage.render(data);
   }
 }

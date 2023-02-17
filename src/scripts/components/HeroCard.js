@@ -12,7 +12,7 @@ export default class HeroCard extends HTMLElement {
     <div class='hero-card-image'>
       <img src='${imageSrc}' alt='${imageAlt}' />
       <div class='hero-card-description'>
-        <h2>${tagline}</h2>
+        <h1>${tagline}</h1>
         <p>${description}</p>
       </div>
     </div>

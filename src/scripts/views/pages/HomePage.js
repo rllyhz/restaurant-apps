@@ -1,4 +1,5 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import { UrlParser } from '../../helpers/RouteHelper';
 import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
 import Restaurant from '../../data/Restaurant';
@@ -16,6 +17,9 @@ export default class HomePage {
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;
     rootPage.style.paddingBottom = contentPaddingSize;
+
+    const activePath = UrlParser.parseActiveUrlWithCombiner();
+    document.querySelector('app-bar').setActiveMenu(activePath);
 
     const restaurantsObservable = observableOf({});
 
@@ -118,13 +122,12 @@ export default class HomePage {
       createElement({
         tagName: CardList.tagName,
         classNames: 'restaurants',
-        dataset: {
-          title: 'Recommended For You',
-        },
         data: {
           detail: {
             listItem: restaurants,
-            headingVariant: 'h3',
+            headingText: 'Recommended For You',
+            headingVariant: 'h2',
+            headingId: 'recommendation',
           },
         },
       }),

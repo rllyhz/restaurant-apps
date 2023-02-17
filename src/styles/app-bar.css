@@ -22,10 +22,12 @@ header .nav-toggle {
 }
 header .nav-toggle i.bx {
   font-size: 2rem;
+  color: var(--primary-color);
 }
 header .nav-brand a {
   display: inline-block;
   font-weight: var(--font-medium);
+  color: var(--primary-color);
   padding: 1rem;
   text-decoration: none;
 }
@@ -55,6 +57,11 @@ header nav.nav-menu .nav-list .nav-item {
 header nav.nav-menu .nav-list .nav-item a {
   display: block;
   padding: 1rem .5rem;
+  transition: all 150ms ease-in-out;
+}
+header nav.nav-menu .nav-list .nav-item a.active,
+header nav.nav-menu .nav-list .nav-item a:hover {
+  color: var(--primary-color);
 }
 
 @media only screen and (min-width: 768px) {

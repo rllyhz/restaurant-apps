@@ -1,5 +1,6 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
 import DataHelper from '../../helpers/DataHelper';
+import { UrlParser } from '../../helpers/RouteHelper';
 import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
 import { StringResource } from '../../globals/config';
@@ -15,6 +16,9 @@ export default class FavoritePage {
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;
     rootPage.style.paddingBottom = contentPaddingSize;
+
+    const activePath = UrlParser.parseActiveUrlWithCombiner();
+    document.querySelector('app-bar').setActiveMenu(activePath);
 
     const favoriteRestaurantsObservable = observableOf({});
 
@@ -34,6 +38,7 @@ export default class FavoritePage {
       }
     });
 
+    // get favorite restaurants;
     RestaurantSource.getFavoriteRestaurants(favoriteRestaurantsObservable);
   }
 
@@ -90,7 +95,7 @@ export default class FavoritePage {
     // Add heading
     appendPage(
       createElement({
-        tagName: 'h3',
+        tagName: 'h1',
         innerText: 'Favorite Restaurants',
         styles: {
           textAlign: 'center',

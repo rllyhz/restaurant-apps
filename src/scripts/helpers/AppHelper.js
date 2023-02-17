@@ -14,12 +14,26 @@ export const initApp = ({
 }) => {
   setTitleApp(title);
 
+  // create skip to content cta
   const skipToContentActionElem = createElement({
     tagName: 'a',
-    classNames: 'skip-to-content-action',
+    classNames: 'skip-to-content-cta',
     innerText: 'Skip to content',
+    data: {
+      tabIndex: '0',
+    },
   });
-  skipToContentActionElem.href = skipToContentRef;
+  const actionCallback = (e) => {
+    if (e.type === 'click' || (e.key === 'Enter' || e.keyCode === 13)) {
+      const refElem = document.querySelector(skipToContentRef);
+      if (refElem) {
+        refElem.scrollIntoView();
+        skipToContentActionElem.blur();
+      }
+    }
+  };
+  skipToContentActionElem.addEventListener('click', actionCallback);
+  skipToContentActionElem.addEventListener('keypress', actionCallback);
   appendBody(skipToContentActionElem);
 
   if (header != null) {

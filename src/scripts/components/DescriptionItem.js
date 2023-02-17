@@ -20,7 +20,7 @@ export default class DescriptionItem extends HTMLElement {
 
     this.innerHTML = `
       <div class='full-description'>
-        <h2 class='name'>${name}🍽️🍴</h2>
+        <h1 class='name'>${name}🍽️🍴</h1>
         <p class='city-rating'>${city} City📌 •• Rating ${rating}⭐</p>
         <p class='address'>${address}</p>
         <p class='description'>${description}</p>

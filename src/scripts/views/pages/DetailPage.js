@@ -9,7 +9,7 @@ import UIState from '../../helpers/UIState';
 
 import ImageCard from '../../components/ImageCard';
 import DescriptionItem from '../../components/DescriptionItem';
-import CustomMenu from '../../components/CustomMenu';
+import CustomChips from '../../components/CustomChips';
 import CustomerReview from '../../components/CustomerReview';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -22,6 +22,8 @@ export default class DetailPage {
 
   static fakeName = 'John';
 
+  static getActivePath = () => UrlParser.parseActiveUrlWithCombiner();
+
   static getId = () => UrlParser.parseActiveUrlWithoutCombiner().id;
 
   static async render() {
@@ -31,6 +33,9 @@ export default class DetailPage {
     rootPage.style.paddingBottom = contentPaddingSize;
     rootPage.style.paddingLeft = contentPaddingSize;
     rootPage.style.paddingRight = contentPaddingSize;
+
+    document.querySelector('app-bar')
+      .setActiveMenu(DetailPage.getActivePath());
 
     DetailPage.restaurantObservable.observe(
       DetailPage.restaurantObserver,
@@ -156,9 +161,23 @@ export default class DetailPage {
 
     appendPage(
       createElement({
-        tagName: CustomMenu.tagName,
+        tagName: CustomChips.tagName,
         data: {
-          menus: restaurant.menus,
+          detail: {
+            title: 'Foods',
+            items: restaurant.menus.foods.map((food) => food.name),
+          },
+        },
+      }),
+    );
+    appendPage(
+      createElement({
+        tagName: CustomChips.tagName,
+        data: {
+          detail: {
+            title: 'Drinks',
+            items: restaurant.menus.drinks.map((drink) => drink.name),
+          },
         },
       }),
     );
