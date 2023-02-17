@@ -27,8 +27,9 @@ export const initApp = ({
     if (e.type === 'click' || (e.key === 'Enter' || e.keyCode === 13)) {
       const refElem = document.querySelector(skipToContentRef);
       if (refElem) {
-        refElem.scrollIntoView();
         skipToContentActionElem.blur();
+        refElem.focus();
+        refElem.scrollIntoView();
       }
     }
   };

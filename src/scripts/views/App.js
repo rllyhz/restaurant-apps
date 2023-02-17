@@ -68,7 +68,7 @@ export default class App {
       footer: createElement({
         tagName: CustomFooter.tagName,
       }),
-      skipToContentRef: '#recommendation',
+      skipToContentRef: '#skip-to-content',
     });
 
     // when the app runs on mobile device (drawer mode enables)

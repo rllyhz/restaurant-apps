@@ -154,7 +154,11 @@ export default class DetailPage {
       createElement({
         tagName: DescriptionItem.tagName,
         data: {
-          model: restaurant,
+          detail: {
+            model: restaurant,
+            isSkipToContentRef: true,
+            headingId: 'skip-to-content',
+          },
         },
       }),
     );

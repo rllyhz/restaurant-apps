@@ -11,18 +11,20 @@ export default class CardList extends HTMLElement {
     headingText = '',
     headingVariant = 'h2',
     headingId = '',
+    isSkipToContentRef = false,
   }) {
     this._items = listItem;
     this._useHeading = useHeading;
     this._headingText = headingText;
     this._headingVariant = headingVariant;
     this._headingId = headingId;
+    this._isSkipToContentRef = isSkipToContentRef;
     this._render();
   }
 
   _createHeadingElem() {
     return '<'.concat(this._headingVariant).concat(' ')
-      .concat(`id='${this._headingId}' class='card-title'>`)
+      .concat(`id='${this._headingId}' ${this._isSkipToContentRef ? 'tabIndex=\'0\'' : ''} class='card-title'>`)
       .concat(this._headingText)
       .concat(`</${this._headingVariant}>`);
   }
