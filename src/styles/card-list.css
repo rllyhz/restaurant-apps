@@ -1,55 +1,56 @@
-.restaurants {
-  /* margin-top: 4rem; */
+card-list .container-card {
   padding: var(--content-padding);
 }
-.restaurants .container-card {
-  padding: var(--content-padding);
-}
-.restaurants .container-card h3 {
+card-list .container-card .card-title {
   margin-top: 1.4;
   margin-bottom: 1rem;
   font-weight: 400;
   font-size: .9rem;
 }
-.restaurants .container-card .container-items {
+card-list .container-card .container-items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-rows: 1fr;
+  gap: 1.4rem;
 }
-.restaurants .container-card .container-items card-item {
+card-list .container-card .container-items card-item {
   border-radius: 4px;
   overflow: hidden;
+  box-shadow: 4px 4px 12px rgba(122, 122, 122, 0.244);
 }
-.restaurants .container-card .container-items card-item .card-content {
+card-list .container-card .container-items card-item .card-content {
   background-color: rgb(224, 216, 216);
   padding: 4px;
+  height: 100%;
 }
-.restaurants .container-card .container-items card-item .card-content .card-image {
+card-list .container-card .container-items card-item .card-content .card-image {
   width: 100%;
   aspect-ratio: 2/1;
   border-radius: 4px;
   overflow: hidden;
 }
-.restaurants .container-card .container-items card-item .card-content .card-image img {
+card-list .container-card .container-items card-item .card-content .card-image img {
   width: inherit;
   height: inherit;
   object-fit: cover;
 }
-.restaurants .container-card .container-items card-item .card-content .card-detail {
+card-list .container-card .container-items card-item .card-content .card-detail {
   padding: 1rem;
+  height: 100%;
 }
-.restaurants .container-card .container-items card-item .card-content .card-detail p:first-child {
+card-list .container-card .container-items card-item .card-content .card-detail p:first-child {
   font-weight: 400;
   margin-bottom: 1rem;
 }
-.restaurants .container-card .container-items card-item .card-content .card-detail p:nth-child(2) {
+card-list .container-card .container-items card-item .card-content .card-detail p:nth-child(2) {
   margin-bottom: .5rem;
   font-style: italic;
 }
-.restaurants .container-card .container-items card-item .card-content .card-detail a {
+card-list .container-card .container-items card-item .card-content .card-detail a {
   display: block;
   border: none;
   background-color: var(--teal-color);
+  color: white;
   width: 100%;
   padding: 1rem 0;
   margin-top: 1rem;
@@ -58,6 +59,6 @@
   border-radius: 4px;
   transition: all 150ms ease-in-out;
 }
-.restaurants .container-card .container-items card-item .card-content .card-detail a:hover {
+card-list .container-card .container-items card-item .card-content .card-detail a:hover {
   background-color: var(--primary-color);
 }

@@ -1,73 +1,39 @@
-const pages = {};
 const history = [];
-let reloadCallback = null;
-let preReloadCallback = null;
+let _data = null;
 
-const _routes = {
-  add(path, page) {
-    pages[path] = page;
-    return this;
+const Router = {
+  getPathData() {
+    return _data;
   },
-  getActivePage(path) {
-    return pages[path];
-  },
-};
 
-class Router {
-  static build() {
-    return _routes;
-  }
-
-  static async addOnPreReloadCallback(newCallback) {
-    preReloadCallback = newCallback;
-  }
-
-  static async addOnReloadCallback(newCallback) {
-    reloadCallback = newCallback;
-  }
-
-  static load({ initialPath }, data = null) {
+  load({ initialPath }, data = null) {
     if (history.length <= 0) {
       history.push(initialPath);
     }
 
-    if (preReloadCallback != null && typeof preReloadCallback === 'function') {
-      preReloadCallback();
-    }
+    _data = data;
+    location.href = initialPath;
+  },
 
-    if (reloadCallback != null && typeof reloadCallback === 'function') {
-      reloadCallback(history[0], data);
-    }
-  }
-
-  static navigateTo(path, data = null) {
+  navigateTo(path, data = null) {
     history.unshift(path);
+    _data = data;
+    location.href = path;
+  },
 
-    if (preReloadCallback != null && typeof preReloadCallback === 'function') {
-      preReloadCallback();
-    }
+  navigateUp() {
+    const path = history.shift();
+    location.hash = path;
+  },
 
-    if (reloadCallback != null && typeof reloadCallback === 'function') {
-      reloadCallback(history[0], data);
-    }
-  }
+  href(url = '/') {
+    location.href = url;
+  },
 
-  static navigateUp() {
-    if (history.length <= 1) {
-      return;
-    }
-
-    history.shift();
-
-    if (preReloadCallback != null && typeof preReloadCallback === 'function') {
-      preReloadCallback();
-    }
-
-    if (reloadCallback != null && typeof reloadCallback === 'function') {
-      reloadCallback(history[0], null);
-    }
-  }
-}
+  path() {
+    return location.hash;
+  },
+};
 
 const _sanitizePath = (path = '') => {
   const chars = Array.from(path);
@@ -81,4 +47,34 @@ const _sanitizePath = (path = '') => {
 const toPath = (path = '/') => `/#/${_sanitizePath(path)}`;
 const toPublicPath = (path = '/') => `/${_sanitizePath(path)}`;
 
-export { Router, toPath, toPublicPath };
+const UrlParser = {
+  parseActiveUrlWithCombiner() {
+    const url = window.location.hash.slice(1).toLowerCase();
+    const splitedUrl = this._urlSplitter(url);
+    return this._urlCombiner(splitedUrl);
+  },
+
+  parseActiveUrlWithoutCombiner() {
+    const url = window.location.hash.slice(1).toLowerCase();
+    return this._urlSplitter(url);
+  },
+
+  _urlSplitter(url) {
+    const urlsSplits = url.split('/');
+    return {
+      resource: urlsSplits[1] || null,
+      id: urlsSplits[2] || null,
+      verb: urlsSplits[3] || null,
+    };
+  },
+
+  _urlCombiner(splitedUrl) {
+    return (splitedUrl.resource ? `/${splitedUrl.resource}` : '/')
+    + (splitedUrl.id ? '/:id' : '')
+    + (splitedUrl.verb ? `/${splitedUrl.verb}` : '');
+  },
+};
+
+export {
+  Router, UrlParser, toPath, toPublicPath,
+};

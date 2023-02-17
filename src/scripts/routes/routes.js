@@ -1,5 +1,11 @@
-import { Router } from '../helpers/RouteHelper';
-import HomePage from '../pages/HomePage';
+import HomePage from '../views/pages/HomePage';
+import DetailPage from '../views/pages/DetailPage';
+import FavoritePage from '../views/pages/FavoritePage';
 
-export default Router.build()
-  .add(HomePage.path, HomePage);
+const routes = {
+  '/': HomePage,
+  '/detail/:id': DetailPage,
+  '/favorite': FavoritePage,
+};
+
+export default routes;

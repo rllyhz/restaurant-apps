@@ -4,6 +4,10 @@ html {
 
   --app-bar-shadow-color: rgba(125, 136, 197, 0.13);
 
+  --max-width-container: 920px;
+  --max-width-hero-image: 1000px;
+  --max-width-detail-image: 720px;
+
   --font-small: 300;
   --font-medium: 400;
   --font-large: 500;
@@ -38,7 +42,7 @@ a {
   color: inherit;
   cursor: pointer;
 }
-.skip-to-content-action {
+.skip-to-content-cta {
   text-decoration: none;
   position: absolute;
   top: -100%;
@@ -49,7 +53,7 @@ a {
   border-bottom-right-radius: 4px;
   color: white;
 }
-.skip-to-content-action:focus {
+.skip-to-content-cta:focus {
   top: 0;
 }
 

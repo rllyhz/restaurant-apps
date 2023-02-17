@@ -1,4 +1,4 @@
-export default class Restaurant {
+export default class FavRestaurant {
   constructor(
     id,
     name,
@@ -6,9 +6,6 @@ export default class Restaurant {
     imageSrc,
     city,
     rating,
-    address = null,
-    customerReviews = [],
-    menus = {},
   ) {
     this.id = id;
     this.name = name;
@@ -16,8 +13,5 @@ export default class Restaurant {
     this.imageSrc = imageSrc;
     this.city = city;
     this.rating = rating;
-    this.address = address;
-    this.customerReviews = customerReviews;
-    this.menus = menus;
   }
 }

@@ -1,0 +1,30 @@
+fab-like-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  margin: var(--content-padding);
+  border-radius: 50%;
+  background-color: var(--teal-color);
+  justify-content: center;
+  align-items: center;
+  padding: 1.2rem;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(36, 36, 36, 0.489);
+}
+fab-like-button.liked {
+  background-color: var(--primary-color);
+}
+fab-like-button,
+fab-like-button.liked {
+  transition: all 150ms ease-in-out;
+}
+fab-like-button:hover,
+fab-like-button.liked:hover {
+  filter: brightness(1.05);
+  box-shadow: 1px 1px 6px rgba(150, 150, 150, 0.24);
+}
