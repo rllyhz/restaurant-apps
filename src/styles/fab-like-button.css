@@ -14,7 +14,7 @@ fab-like-button {
   color: white;
   font-size: 2rem;
   cursor: pointer;
-  box-shadow: 2px 2px 6px rgba(36, 36, 36, 0.489);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
 }
 fab-like-button.liked {
   background-color: var(--primary-color);
