@@ -14,6 +14,8 @@ import '../styles/error-message.css';
 import '../styles/fab-like-button.css';
 import '../styles/toast-message.css';
 
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import App from './views/App';
 import swRegister from './utils/sw-register';
 
