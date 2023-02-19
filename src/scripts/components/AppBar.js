@@ -52,7 +52,7 @@ export default class AppBar extends HTMLElement {
           <ul class='nav-list'>
             <li class='nav-item'><a title='Home' href='${toPath('/')}'>Home</a></li>
             <li class='nav-item'><a title='Favorite Restaurants' href='${toPath('/favorite')}'>Favorite</a></li>
-            <li class='nav-item'><a title='About Us' href='https://rllyhz.github.io/' target='_blank'>About Us</a></li>
+            <li class='nav-item'><a title='About Us' href='https://rllyhz.github.io/' target='_blank' rel='noreferrer'>About Us</a></li>
           </ul>
         </nav>
       </header>
