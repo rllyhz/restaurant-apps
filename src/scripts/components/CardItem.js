@@ -20,7 +20,7 @@ export default class CardItem extends HTMLElement {
     this.innerHTML = `
     <div class='card-content' data-id='${this.id}'>
     <div class='card-image'>
-      <img src='${this.imageSrc}' alt='${this.name}' />
+      <img src='./images/placeholders/small_card_placeholder.jpg' data-src='${this.imageSrc}' alt='${this.name}' class='lazyload' />
     </div>
     <div class='card-detail'>
         <p>${this.name}🍽️🍴</p>

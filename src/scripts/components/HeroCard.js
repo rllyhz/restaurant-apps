@@ -12,7 +12,7 @@ export default class HeroCard extends HTMLElement {
     <div class='hero-card-image'>
       <picture>
         <source media='(max-width: 700px)' srcset='${smallImageSrc}'>
-        <img src='${largeImageSrc}' 
+        <img src='./images/placeholders/big_card_placeholder.jpg' data-src='${largeImageSrc}' class='lazyload' 
             alt='${imageAlt}'>
       </picture>
       <div class='hero-card-description'>
