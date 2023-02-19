@@ -13,10 +13,17 @@
   background-color: rgba(0, 0, 0, 0.733);
   z-index: 1;
 }
-.hero-card-image img {
+.hero-card-image picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-card-image picture,
+.hero-card-image picture img {
   width: 100%;
   height: inherit;
   object-fit: cover;
+  aspect-ratio: 2/1;
 }
 .hero-card-image .hero-card-description {
   position: absolute;
