@@ -99,9 +99,15 @@ export default class App {
 
     const currentPath = UrlParser.parseActiveUrlWithCombiner();
     const activePage = routes[currentPath];
+    document.querySelector('app-bar').setActiveMenu(currentPath);
 
     getRootPage().innerHTML = ''; // clear page container
     document.querySelector('app-bar').scrollIntoView();
     await activePage.render(data);
+  }
+
+  static updateAppShell() {
+    const activePath = UrlParser.parseActiveUrlWithCombiner();
+    document.querySelector('app-bar').setActiveMenu(activePath);
   }
 }

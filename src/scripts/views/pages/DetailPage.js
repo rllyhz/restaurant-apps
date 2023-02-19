@@ -23,8 +23,6 @@ export default class DetailPage {
 
   static fakeName = 'John';
 
-  static getActivePath = () => UrlParser.parseActiveUrlWithCombiner();
-
   static getId = () => UrlParser.parseActiveUrlWithoutCombiner().id;
 
   static async render() {
@@ -37,9 +35,6 @@ export default class DetailPage {
     rootPage.style.paddingBottom = contentPaddingSize;
     rootPage.style.paddingLeft = contentPaddingSize;
     rootPage.style.paddingRight = contentPaddingSize;
-
-    document.querySelector('app-bar')
-      .setActiveMenu(DetailPage.getActivePath());
 
     DetailPage.restaurantObservable.observe(
       DetailPage.restaurantObserver,

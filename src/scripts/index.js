@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
 });
 
 window.addEventListener('hashchange', () => {
+  App.updateAppShell();
   // re-render page
   App.renderPage();
 });
