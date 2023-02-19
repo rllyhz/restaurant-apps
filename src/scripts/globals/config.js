@@ -19,6 +19,11 @@ const StringResource = {
   emptyDataTitleText: (categoryName) => `${categoryName} are still empty`,
   emptyDataDescriptionText: 'Try add some to place here',
   errorBtnRetryText: 'Refresh',
+  failedToAddReviewsToastMessage: 'Failed to add reviews!',
+  successfullyAddedReviewsToastMessage: 'Successfully added reviews!',
+  noConnectionToastMessage: 'You\'re offline. Try again later!',
+  successfullyLikedToastMessage: 'Added to favorites!',
+  successfullyUnLikedToastMessage: 'Removed from favorites!',
 };
 
 export { CONFIG, StringResource };

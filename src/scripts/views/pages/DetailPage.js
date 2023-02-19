@@ -15,6 +15,7 @@ import CustomerReview from '../../components/CustomerReview';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import ErrorMessage from '../../components/ErrorMessage';
 import FabLikeButton from '../../components/FabLikeButton';
+import ToastMessage from '../../components/ToastMessage';
 
 export default class DetailPage {
   static restaurantObservable = observableOf({});
@@ -84,12 +85,15 @@ export default class DetailPage {
       customReviewerElem.loadingUI();
     } else if (result.state === UIState.ERROR) {
       customReviewerElem.errorUI();
+      DetailPage.showToast(StringResource.failedToAddReviewsToastMessage);
     } else if (result.data.error) {
       customReviewerElem.errorUI();
+      DetailPage.showToast(StringResource.failedToAddReviewsToastMessage);
     } else {
       const { customerReviews } = result.data;
       DetailPage.onUpdateReviews(customerReviews);
       customReviewerElem.resetInput();
+      DetailPage.showToast(StringResource.successfullyAddedReviewsToastMessage);
     }
   }
 
@@ -192,7 +196,11 @@ export default class DetailPage {
           detail: {
             reviews: restaurant.customerReviews,
             onAddReviewCallback: (review) => {
-              onAddNewReview(restaurant.id, review);
+              if (window.navigator.onLine) {
+                onAddNewReview(restaurant.id, review);
+              } else {
+                DetailPage.showToast(StringResource.noConnectionToastMessage);
+              }
             },
           },
         },
@@ -216,8 +224,10 @@ export default class DetailPage {
                 RestaurantSource.addToFavorite(
                   DataHelper.modelToFav(restaurant),
                 );
+                DetailPage.showToast(StringResource.successfullyLikedToastMessage);
               } else {
                 RestaurantSource.deleteFromFavorite(restaurant.id);
+                DetailPage.showToast(StringResource.successfullyUnLikedToastMessage);
               }
             },
           },
@@ -232,5 +242,11 @@ export default class DetailPage {
     const customReviewerElem = getRootPage().querySelector(CustomerReview.tagName);
 
     customReviewerElem.addReview(name, review, date);
+  }
+
+  static showToast(message) {
+    ToastMessage.make({
+      message,
+    }).show();
   }
 }
