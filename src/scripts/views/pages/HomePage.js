@@ -108,7 +108,8 @@ export default class HomePage {
         tagName: HeroCard.tagName,
         data: {
           heroData: {
-            imageSrc: './images/heros/hero-image_2.jpg',
+            smallImageSrc: './images/heros/hero-image_2-small.jpg',
+            largeImageSrc: './images/heros/hero-image_2-large.jpg',
             imageAlt: 'Hero card image',
             tagline: 'Taste and Delicious',
             description: 'Find the best food and dishes from the best restaurants for your best preferences',
