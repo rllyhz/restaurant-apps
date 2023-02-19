@@ -8,6 +8,7 @@ export default class CustomerReview extends HTMLElement {
       const review = textarea.value;
       if (review.length > 1) onAddReviewCallback(review);
     };
+    this._ctaText = 'Review';
     this._render();
   }
 
@@ -26,7 +27,7 @@ export default class CustomerReview extends HTMLElement {
         <div class='reviews-container'></div>
         <div class='give-review'>
           <textarea></textarea>
-          <button>Review</button>
+          <button>${this._ctaText}</button>
         </div>
       </div>
     `;
@@ -50,15 +51,18 @@ export default class CustomerReview extends HTMLElement {
 
   resetInput() {
     this.querySelector('.full-reviews .give-review button').removeAttribute('disabled');
+    this.querySelector('.full-reviews .give-review button').innerText = this._ctaText;
     this.querySelector('.full-reviews .give-review textarea').value = '';
   }
 
   loadingUI() {
     this.querySelector('.full-reviews .give-review button').setAttribute('disabled', '');
+    this.querySelector('.full-reviews .give-review button').innerText = 'Loading...';
   }
 
   errorUI() {
     this.querySelector('.full-reviews .give-review button').removeAttribute('disabled');
+    this.querySelector('.full-reviews .give-review button').innerText = this._ctaText;
   }
 }
 
