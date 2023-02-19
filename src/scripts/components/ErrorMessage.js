@@ -9,7 +9,7 @@ export default class ErrorMessage extends HTMLElement {
     this._retryBtnText = retryBtnText;
     this._enableRetry = enableRetry;
 
-    this.btnCallback = () => {
+    this._btnCallback = () => {
       retryBtnCallback();
     };
 
@@ -17,11 +17,11 @@ export default class ErrorMessage extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.enableRetry) this.querySelector('.retry').addEventListener('click', this._btnCallback);
+    if (this._enableRetry) this.querySelector('.retry').addEventListener('click', this._btnCallback);
   }
 
   disconnectedCallback() {
-    if (this.enableRetry) this.querySelector('.retry').removeEventListener('click', this._btnCallback);
+    if (this._enableRetry) this.querySelector('.retry').removeEventListener('click', this._btnCallback);
   }
 
   _render() {
