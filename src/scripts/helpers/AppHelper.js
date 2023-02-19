@@ -5,14 +5,43 @@ export const isOnMobileMode = () => {
   return viewport <= 768;
 };
 
-export const setTitleApp = (newTitle) => {
+export const setTitleApp = (newTitle = '') => {
   document.title = newTitle;
 };
 
+export const setDescriptionApp = (newDescription = '') => {
+  document.querySelector('meta[name="description"]').setAttribute('content', newDescription);
+};
+
+export const getAppName = () => document.querySelector('meta[name="my-app-name"]').getAttribute('content');
+
+export const setAppName = (newName = '') => {
+  document.querySelector('meta[name="my-app-name"]').setAttribute('content', newName);
+};
+
+export const putMetaTag = (name = '', content = '') => {
+  if (document.querySelector(`meta[name='${name}']`)) {
+    document.querySelector(`meta[name='${name}']`).setAttribute(name, content);
+    return;
+  }
+
+  const newMetaTag = document.createElement('meta');
+  newMetaTag.setAttribute('name', name);
+  newMetaTag.setAttribute('content', content);
+
+  if (document.querySelector('meta[name="description"]')) {
+    document.querySelector('meta[name="description"]').after(newMetaTag);
+  } else {
+    document.head.appendChild(newMetaTag);
+  }
+};
+
 export const initApp = ({
-  title = '', header = null, footer = null, skipToContentRef = `#${rootPageElementId}`,
+  name = '', initialTitle = '', description = '', header = null, footer = null, skipToContentRef = `#${rootPageElementId}`,
 }) => {
-  setTitleApp(title);
+  setAppName(name);
+  setTitleApp(initialTitle);
+  setDescriptionApp(description);
 
   // create skip to content cta
   const skipToContentActionElem = createElement({

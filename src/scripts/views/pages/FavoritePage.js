@@ -1,4 +1,5 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import { setTitleApp, setDescriptionApp } from '../../helpers/AppHelper';
 import DataHelper from '../../helpers/DataHelper';
 import { UrlParser } from '../../helpers/RouteHelper';
 import { observableOf } from '../../helpers/Extension';
@@ -12,6 +13,9 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 
 export default class FavoritePage {
   static async render() {
+    setTitleApp(StringResource.title('Favorite Restaurants'));
+    setDescriptionApp(StringResource.description('Favorite page, Favorites, Favorites Restaurants, Liked contents'));
+
     const rootPage = getRootPage();
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;

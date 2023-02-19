@@ -1,6 +1,7 @@
 import 'regenerator-runtime'; /* for async await transpile */
 import routes from '../routes/routes';
 import { Router, toPath, UrlParser } from '../helpers/RouteHelper';
+import { StringResource } from '../globals/config';
 import { createElement, getElem, getRootPage } from '../helpers/DomHelper';
 import { EventType, broadcastEvent } from '../helpers/EventHelper';
 import { initApp, isOnMobileMode } from '../helpers/AppHelper';
@@ -37,7 +38,9 @@ export default class App {
 
     // init app shell
     initApp({
-      title: 'Restaurant App | Rully Ihza Mahendra',
+      name: 'Restaurants Recommendation WebApp',
+      initialTitle: StringResource.title('Home'),
+      description: StringResource.description('Restaurants recommendation'),
       header: createElement({
         tagName: AppBar.tagName,
         data: {

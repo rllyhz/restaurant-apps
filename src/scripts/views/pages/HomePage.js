@@ -1,4 +1,5 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import { setDescriptionApp, setTitleApp } from '../../helpers/AppHelper';
 import { UrlParser } from '../../helpers/RouteHelper';
 import { observableOf } from '../../helpers/Extension';
 import RestaurantSource from '../../data/RestaurantSource';
@@ -13,6 +14,9 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 
 export default class HomePage {
   static async render() {
+    setTitleApp(StringResource.title('Home'));
+    setDescriptionApp(StringResource.description('Detail page, Recommendation for you, Restaurants'));
+
     const rootPage = getRootPage();
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;

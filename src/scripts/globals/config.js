@@ -9,6 +9,9 @@ const CONFIG = {
 };
 
 const StringResource = {
+  appName: 'Restaurants Recommendation WebApp',
+  title: (pageName) => `${StringResource.appName} | ${pageName}`,
+  description: (metaDescription) => `${StringResource.appName}, ${metaDescription}`,
   errorTitleText: 'Opsss... Something went wrong',
   errorConnectionDescriptionText: 'It seemed like you\'re currently offline. Please check your connection and try again later.',
   errorRequestAPIDescriptionText: 'It seemed like you\'re your request were missing somehow. Please try again later.',

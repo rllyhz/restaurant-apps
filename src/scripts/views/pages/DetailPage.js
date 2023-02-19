@@ -1,4 +1,5 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
+import { setTitleApp, setDescriptionApp } from '../../helpers/AppHelper';
 import { UrlParser } from '../../helpers/RouteHelper';
 import DataHelper from '../../helpers/DataHelper';
 import { observableOf } from '../../helpers/Extension';
@@ -27,6 +28,9 @@ export default class DetailPage {
   static getId = () => UrlParser.parseActiveUrlWithoutCombiner().id;
 
   static async render() {
+    setTitleApp(StringResource.title('Detail'));
+    setDescriptionApp(StringResource.description('Detail page, Restaurant detail info'));
+
     const rootPage = getRootPage();
     const contentPaddingSize = getComputedStyle(rootPage).getPropertyValue('--content-padding');
     rootPage.style.paddingTop = contentPaddingSize;
