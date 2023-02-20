@@ -59,6 +59,7 @@ export default class ToastMessage extends HTMLElement {
       } else {
         this.classList.remove('dismiss');
         this.classList.remove('show');
+        this.remove();
       }
     };
   }
