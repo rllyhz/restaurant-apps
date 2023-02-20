@@ -2,11 +2,12 @@
 import { broadcastEvent } from '../../src/scripts/helpers/EventHelper';
 
 describe('EventHelper', () => {
-  it('should broadcast an event successfully', () => {
+  it('should broadcast an event successfully', (done) => {
     const expectedEventType = 'event-testing';
 
     const listener = (e) => {
       expect(e.type).toEqual(expectedEventType);
+      done();
     };
 
     document.body.addEventListener(expectedEventType, listener);
@@ -15,7 +16,7 @@ describe('EventHelper', () => {
     document.body.removeEventListener(expectedEventType, listener);
   });
 
-  it('should broadcast an event with data successfully', () => {
+  it('should broadcast an event with data successfully', (done) => {
     const expectedEventType = 'event-testing';
     const expectedDetail = {
       id: new Date().toISOString(),
@@ -25,6 +26,7 @@ describe('EventHelper', () => {
     const listener = (e) => {
       expect(e.type).toEqual(expectedEventType);
       expect(e.detail).toEqual(expectedDetail);
+      done();
     };
 
     document.body.addEventListener(expectedEventType, listener);

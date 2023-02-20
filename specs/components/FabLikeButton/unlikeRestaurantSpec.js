@@ -21,12 +21,13 @@ describe('Unliking A Restaurant', () => {
       .toBeFalsy();
   });
 
-  it('should be able to unlike', async () => {
+  it('should be able to unlike', (done) => {
     setContentBody(
       createFabLikeButton({
         isLiked: true,
         onClickedCallback: (_isLiked) => {
           expect(_isLiked).toBeFalse();
+          done();
         },
       }),
     );
