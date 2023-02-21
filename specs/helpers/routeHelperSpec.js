@@ -3,15 +3,15 @@ import { toPath, toPublicPath } from '../../src/scripts/helpers/RouteHelper';
 
 describe('RouteHelper', () => {
   it('should parse the path into hash correctly when specific path provided', () => {
-    let expectedPath = '/#/home';
+    let expectedPath = '#/home';
     let result = toPath('/home');
     expect(result).toEqual(expectedPath);
 
-    expectedPath = '/#/detail';
+    expectedPath = '#/detail';
     result = toPath('detail/');
     expect(result).toEqual(expectedPath);
 
-    expectedPath = '/#/detail/2';
+    expectedPath = '#/detail/2';
     result = toPath('/detail/2');
     expect(result).toEqual(expectedPath);
   });
