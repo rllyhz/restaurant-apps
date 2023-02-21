@@ -1,6 +1,5 @@
 import 'regenerator-runtime'; /* for async await transpile */
-import routes from '../routes/routes';
-import { Router, toPath, UrlParser } from '../helpers/RouteHelper';
+import { Router } from '../helpers/RouteHelper';
 import { StringResource } from '../globals/config';
 import { createElement, getElem, getRootPage } from '../helpers/DomHelper';
 import { EventType, broadcastEvent } from '../helpers/EventHelper';
@@ -8,6 +7,7 @@ import { initApp, isOnMobileMode } from '../helpers/AppHelper';
 
 import AppBar from '../components/AppBar';
 import CustomFooter from '../components/CustomFooter';
+import routes from '../routes/routes';
 
 export default class App {
   static async init() {
@@ -84,22 +84,14 @@ export default class App {
       );
     }
 
-    // render active page initially
-    if (Router.path()) {
-      // path => #/
-      App.renderPage();
-    } else {
-      // path => /
-      Router.load({ initialPath: toPath('/') });
-    }
+    App.renderPage();
   }
 
   static async renderPage() {
-    const data = Router.getPathData();
+    const { data, activePath } = Router.getExpectedRoute();
+    const activePage = routes[activePath];
 
-    const currentPath = UrlParser.parseActiveUrlWithCombiner();
-    const activePage = routes[currentPath];
-    document.querySelector('app-bar').setActiveMenu(currentPath);
+    document.querySelector('app-bar').setActiveMenu(activePath);
 
     getRootPage().innerHTML = ''; // clear page container
     document.querySelector('app-bar').scrollIntoView();
@@ -107,7 +99,7 @@ export default class App {
   }
 
   static updateAppShell() {
-    const activePath = UrlParser.parseActiveUrlWithCombiner();
+    const activePath = Router.getActivePath();
     document.querySelector('app-bar').setActiveMenu(activePath);
   }
 }

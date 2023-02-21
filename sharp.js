@@ -5,8 +5,14 @@ const path = require('path');
 const target = path.resolve(__dirname, 'src/public/images/heros');
 const destination = path.resolve(__dirname, 'dist/images/heros');
 
-if (!fs.existsSync(destination)) {
-  fs.mkdirSync(destination);
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist');
+}
+if (!fs.existsSync('dist/images')) {
+  fs.mkdirSync('dist/images');
+}
+if (!fs.existsSync('dist/images/heros')) {
+  fs.mkdirSync('dist/images/heros');
 }
 
 fs.readdirSync(target)

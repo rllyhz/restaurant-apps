@@ -1,8 +1,8 @@
 import { appendPage, createElement, getRootPage } from '../../helpers/DomHelper';
 import { setTitleApp, setDescriptionApp } from '../../helpers/AppHelper';
-import { UrlParser } from '../../helpers/RouteHelper';
 import DataHelper from '../../helpers/DataHelper';
 import { observableOf } from '../../helpers/Extension';
+import { Router } from '../../helpers/RouteHelper';
 import RestaurantSource from '../../data/RestaurantSource';
 import Restaurant from '../../data/Restaurant';
 import { CONFIG, StringResource } from '../../globals/config';
@@ -24,8 +24,6 @@ export default class DetailPage {
 
   static fakeName = 'John';
 
-  static getId = () => UrlParser.parseActiveUrlWithoutCombiner().id;
-
   static async render() {
     setTitleApp(StringResource.title('Detail'));
     setDescriptionApp(StringResource.description('Detail page, Restaurant detail info'));
@@ -45,14 +43,14 @@ export default class DetailPage {
     );
 
     // initially fetch restaurant detail
-    const id = DetailPage.getId();
+    const id = Router.getId();
     RestaurantSource.getDetailOf(id, DetailPage.restaurantObservable);
   }
 
   static restaurantObserver(result) {
     getRootPage().innerHTML = '';
 
-    const id = DetailPage.getId();
+    const id = Router.getId();
 
     if (result.state === UIState.LOADING) {
       DetailPage.onLoading();

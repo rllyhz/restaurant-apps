@@ -5,7 +5,7 @@ const _getToastElem = () => document.querySelector('toast-message');
 const _createToastElem = () => document.createElement('toast-message');
 const _removeToastElem = () => document.body.removeChild(_getToastElem());
 
-const _createToast = (message, backgroundColor, color, duration, size, position) => {
+const _createToast = (message, backgroundColor, color, duration, position) => {
   if (_getToastElem()) {
     _removeToastElem();
   }
@@ -14,7 +14,7 @@ const _createToast = (message, backgroundColor, color, duration, size, position)
   appendBody(toastElem);
 
   toastElem._create({
-    message, duration, size, position, backgroundColor, color,
+    message, duration, position, backgroundColor, color,
   });
 
   return toastElem;
@@ -34,12 +34,6 @@ export default class ToastMessage extends HTMLElement {
     LONG: 'long',
   };
 
-  static Size = {
-    SMALL: 'small',
-    NORMAL: 'normal',
-    LARGE: 'large',
-  };
-
   static isShowing() {
     const toastElem = _getToastElem();
     if (!toastElem) return false;
@@ -49,12 +43,11 @@ export default class ToastMessage extends HTMLElement {
   static make({
     message = '',
     duration = ToastMessage.Duration.SHORT,
-    size = ToastMessage.Size.SMALL,
     position = ToastMessage.Position.BOTTOM,
     backgroundColor = 'white',
     color = 'black',
   }) {
-    return _createToast(message, backgroundColor, color, duration, size, position);
+    return _createToast(message, backgroundColor, color, duration, position);
   }
 
   constructor() {
@@ -66,6 +59,7 @@ export default class ToastMessage extends HTMLElement {
       } else {
         this.classList.remove('dismiss');
         this.classList.remove('show');
+        this.remove();
       }
     };
   }
@@ -91,7 +85,6 @@ export default class ToastMessage extends HTMLElement {
   _create({
     message = '',
     duration = ToastMessage.Duration,
-    size = ToastMessage.Size.SMALL,
     position = ToastMessage.Position.BOTTOM,
     backgroundColor,
     color,
@@ -99,7 +92,6 @@ export default class ToastMessage extends HTMLElement {
     this._message = message;
     this._duration = duration;
     this._position = position;
-    this._size = size;
     this._backgroundColor = backgroundColor;
     this._color = color;
 
@@ -125,13 +117,6 @@ export default class ToastMessage extends HTMLElement {
     this.style.color = this._color;
 
     this._setPosition();
-    this._setSize();
-  }
-
-  _setSize() {
-    if (this._size === ToastMessage.Size.SMALL) {
-      //
-    }
   }
 
   _setPosition() {
