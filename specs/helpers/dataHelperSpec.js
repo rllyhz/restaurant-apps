@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { getDummyFavRestaurant, getDummyRestaurant } from '../utils/dataFactories';
 import DataHelper from '../../src/scripts/helpers/DataHelper';
 import Restaurant from '../../src/scripts/data/Restaurant';

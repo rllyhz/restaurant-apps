@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { toPath, toPublicPath } from '../../src/scripts/helpers/RouteHelper';
 
 describe('RouteHelper', () => {

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { setContentBody, createFabLikeButton } from '../../utils/testFactories';
 import FabLikeButton from '../../../src/scripts/components/FabLikeButton';
 

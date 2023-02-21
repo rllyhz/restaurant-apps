@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { createAppBar, createFooter } from '../utils/testFactories';
 import {
   initApp,

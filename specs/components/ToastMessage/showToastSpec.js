@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { createToastMessage } from '../../utils/testFactories';
 
 describe('ShowToast', () => {

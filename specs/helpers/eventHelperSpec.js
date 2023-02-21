@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { broadcastEvent } from '../../src/scripts/helpers/EventHelper';
 
 describe('EventHelper', () => {

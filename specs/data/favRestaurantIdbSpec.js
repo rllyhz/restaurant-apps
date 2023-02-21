@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import FavRestaurantIdb from '../../src/scripts/data/FavRestaurantIdb';
 import { getDummyFavRestaurant } from '../utils/dataFactories';
 
