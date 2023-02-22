@@ -33,3 +33,5 @@ fs.readdirSync(target)
         `${destination}/${image.split('.').slice(0, -1).join('.')}-small.jpg`,
       ));
   });
+
+console.log('Image asset files ready to use..\n');

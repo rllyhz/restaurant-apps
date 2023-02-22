@@ -7,8 +7,8 @@
     "start-dev": "webpack-dev-server --config webpack.dev.js",
     "build-prod": "webpack --config webpack.prod.js",
     "build-image": "node sharp.js",
-    "build": "npm run build-prod && npm run build-image",
-    "serve": "npm run build-image && npm run start-dev",
+    "serve": "npm run lint && npm run start-dev",
+    "build": "npm run lint && npm run build-prod",
     "test": "karma start",
     "e2e": "codeceptjs run --steps",
     "lint": "eslint ./src"
@@ -52,6 +52,7 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2",
     "webpack-merge": "^5.8.0",
+    "webpack-shell-plugin-next": "^2.3.1",
     "whatwg-fetch": "^3.6.2"
   },
   "dependencies": {
