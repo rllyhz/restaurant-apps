@@ -1,6 +1,7 @@
 # Restaurant App Front-End Web
 
 A project for completing Dicoding course's Front-end Web Expert.
+You can check it out by visiting this url [https://shiny-sprite-32fa9f.netlify.app/](https://shiny-sprite-32fa9f.netlify.app/) to see the deployed version of this project.
 
 ## Milestones
 
