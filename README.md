@@ -16,19 +16,19 @@ A project for completing Dicoding course's Front-end Web Expert.
 <p align="center">
     <img src="art/home.gif"
         alt="Home Demo"
-        width="200" />
+        width="400" />
 </p>
 
 <p align="center">
     <img src="art/detail.gif"
         alt="Detail Demo"
-        width="200" />
+        width="400" />
 </p>
 
 <p align="center">
     <img src="art/favorites.gif"
         alt="Favorites Demo"
-        width="200" />
+        width="400" />
 </p>
 
 ### Mobile
@@ -36,7 +36,7 @@ A project for completing Dicoding course's Front-end Web Expert.
 <p align="center">
     <img src="art/mobile_demo.gif"
         alt="Mobile UI Demo"
-        width="200" />
+        width="400" />
 </p>
 
 ### Web Vitals Report
@@ -44,5 +44,5 @@ A project for completing Dicoding course's Front-end Web Expert.
 <p align="center">
     <img src="art/web_vitals_analysis.gif"
         alt="Web Vitals Report"
-        width="200" />
+        width="400" />
 </p>
